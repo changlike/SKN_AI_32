@@ -32,5 +32,7 @@ main.py 실행
 |
 
 1번 선택 -> while_mission 메뉴 실행
+
 2번 선택 -> fileio_mission 메뉴 실행
+
 9번 선택 -> 종료
