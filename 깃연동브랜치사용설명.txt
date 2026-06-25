@@ -1,0 +1,38 @@
+# 깃허브와 파이참 프로젝트 연결 (마스터)
+
+1. 깃허브에 리포지토리(저장소) 만들기함
+=> url 복사
+
+2. 파이참 실행 > 새 프로젝트 만들기 (리포지토리 이름과 프로젝트명 같게 함)
+
+3. 깃허브 저장소와 파이참 프로젝트 연결
+git remote add origin https://github.com/사용자계정/프로젝트명.git
+ ex>
+ git remote add origin https://github.com/changlike/word_embed_project.git
+ 연결확인:
+ git remote -v
+표시되면 연결 성공:
+origin  https://github.com/changlike/word_embed_project.git (fetch)
+origin  https://github.com/changlike/word_embed_project.git (push)
+
+4. 마스터가 프로젝트 구조에 대한 설정과 패키지 지정 등 파일 작업 진행함
+# .gitignore 파일 작성 (깃허브에 푸시되면 안되는 파일들 설정)
+# requirements.txt 작성
+# README.md 작성
+# 기본 앱 구조에 필요한 패키지 폴더, py 파일들 작성
+
+5. 프로젝트 최초 커밋 (마스터)
+브렌치 확인:
+git branch
+처음 연결 시에는
+*master
+마스터 브렌치이면 main 브렌치로 변경
+git branch -M main
+git branch
+*main 확인
+
+main 브렌치로 푸시함
+git push -u origin main
+git add .
+git commit -m 'Initial commit'
+
