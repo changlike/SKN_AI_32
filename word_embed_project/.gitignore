@@ -1,0 +1,70 @@
+# python
+# 캐시 폴더 제외: 실행 속도를 높이기 위해 자동으로 생성하는 캐시 디렉토리
+__pycache__/
+# / -> pycache 폴더 아래에 있는 파일 올리지 마라
+
+#컴파일 파일 제외: [cod]는 *.pyc, *.pyo, *.pyd를 한 줄로 표현한 패턴임
+*.py[cod]
+
+# Jython 컴파일 파일 제외
+*$py.class
+
+# 최적화 바이트코드 제외
+*.pyo
+
+# Windows 파이썬 확장 모듈 (DLL과 유사함)
+*.pyd
+
+
+# 가상환경
+.venv/
+venv/
+.env
+env/
+ENV/
+# 실무에서는 여러 개로 나누어 env 파일을 활용하는 경우가 있음
+# env 폴더 아래에 .db 이런식으로 나눠서 환경변수 설정하기도 함
+
+
+# 파이참
+.idea/
+.vscode/
+*.iml
+
+
+# 운영체제 임시 파일
+.DS_Store
+Thumbs.db
+
+
+# 임시 실행 결과 파일들: 로그
+*.log
+*.tmp
+*.bak
+
+# Jupyter 관련 파일
+.ipynb_checkpoints/
+
+# 실습 중 자동 생성될 수 있는 데이터 파일
+# 팀원 간 필요 시 개별적으로 주고 받기함 (sns, discord 등)
+*.csv
+#*.txt
+*.xlsx
+
+
+# 학습된 모델 / 벡터 파일
+# 대용량 파일은 깃허브에 올리지 않음
+*.model
+*.vec
+*.bin
+*.gz
+eng_w2v
+*.npy
+*.npz
+
+# matplolib 등 실행 결과 이미지
+*.png
+*.jpg
+*.jpeg
+*.svg
+
