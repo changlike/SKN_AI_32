@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>제15강 — 정리 &amp; 체크리스트</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/style.css" rel="stylesheet"/>
+</head><body>
+<div class="topbar">
+<a class="home" href="../index.html">📚 Agentic AI 강의</a>
+<span class="ch">제15강 · vector database</span>
+<span class="meta">한국기술교육대학교 · AI 특화 인재양성 과정</span>
+</div>
+<div class="wrap">
+<div class="content">
+<div class="chip-nav"><b>제15강 · vector database — 세부 목차</b><a class="" href="01_대량-검색과-인덱스-저장.html">01. 대량 검색과 인덱스 저장</a><a class="" href="02_벡터DB의-역할.html">02. 벡터DB의 역할</a><a class="" href="03_FAISS-vs-Chroma.html">03. FAISS vs Chroma</a><a class="" href="04_인덱스-영속화-아키텍처.html">04. 인덱스 영속화 아키텍처</a><a class="" href="05_따라하기-FAISS-인덱스-만들기.html">05. 따라하기 FAISS 인덱스 만들기</a><a class="" href="06_따라하기-인덱스-저장과-재로드.html">06. 따라하기 인덱스 저장과 재로드</a><a class="" href="07_메타데이터-필터링-검색.html">07. 메타데이터 필터링 검색</a><a class="" href="08_인덱스-증분-업데이트.html">08. 인덱스 증분 업데이트</a><a class="cur" href="09_정리-체크리스트.html">09. 정리 체크리스트</a><a class="" href="10_실습문제와-해답.html">10. 실습문제와 해답</a></div>
+<div class="md">
+<h1 id="_1">정리 &amp; 체크리스트</h1>
+<h2 id="15">15강에서 배운 것</h2>
+<p>15강에서는 벡터를 영속 저장하고 대량·고속으로 검색하는 벡터DB를 배웠습니다.</p>
+<ul>
+<li><strong>벡터DB의 역할</strong>: 인덱싱(사전 1회)과 서비스(매 요청)를 분리.</li>
+<li><strong>FAISS vs Chroma</strong>: FAISS는 가볍고 빠름, Chroma는 메타데이터 필터에 강함.</li>
+<li><strong>영속화 아키텍처</strong>: 요청 핸들러에서 재인덱싱 금지, build/service 분리.</li>
+<li><strong>메타데이터 필터</strong>: 특정 문서 안에서만 검색(Chroma).</li>
+<li><strong>증분 업데이트</strong>: 새 문서만 <code>add_documents</code>로 덧붙임.</li>
+</ul>
+<hr/>
+<h2 id="_2">한눈에 보는 핵심 코드</h2>
+<pre><code class="language-python">from langchain_community.vectorstores import FAISS
+from common import get_embeddings, DATA
+
+emb = get_embeddings()
+
+# === 인덱싱 (배치, 1회) ===
+vs = FAISS.from_documents(chunks, emb)        # 임베딩 + 인덱스 (비쌈)
+vs.save_local(str(DATA / "faiss_index"))      # 저장
+
+# === 서비스 (서버 기동 시 1회 로드) ===
+vs = FAISS.load_local(str(DATA / "faiss_index"), emb,
+                      allow_dangerous_deserialization=True)   # 재임베딩 X
+results = vs.similarity_search("질문", k=3)    # 빠른 검색
+
+# === 증분 추가 ===
+vs.add_documents(new_chunks)                   # 새 청크만 추가
+</code></pre>
+<hr/>
+<h2 id="_3">이 강에서 설치한 라이브러리</h2>
+<pre><code class="language-bash">pip install faiss-cpu langchain-community langchain-google-genai pypdf
+pip install langchain-chroma   # (메타데이터 필터, 07번)
+</code></pre>
+<hr/>
+<h2 id="rag-5">RAG 5단계 진행 상황</h2>
+<blockquote>
+<p>① 로드 ✓ · ② 청킹 ✓ · ③ 임베딩 ✓ · ④ 저장/검색 ✓(15강) · <strong>⑤ 생성 ← 16강(다음)</strong></p>
+</blockquote>
+<p>이제 RAG의 <strong>검색 인프라</strong>가 완성됐습니다. 다음 강에서 검색 결과로 LLM이 답하면 RAG가 완성됩니다.</p>
+<hr/>
+<h2 id="_4">체크리스트</h2>
+<ul>
+<li>[ ] 벡터DB가 인덱싱과 서비스를 분리하는 이유를 안다.</li>
+<li>[ ] FAISS와 Chroma의 차이를 설명할 수 있다.</li>
+<li>[ ] <code>from_documents</code>(인덱싱)와 <code>load_local</code>(서비스)을 구분해 쓴다.</li>
+<li>[ ] <code>save_local</code>/<code>load_local</code>로 영속화하고 재임베딩을 피했다.</li>
+<li>[ ] 메타데이터 필터와 증분 업데이트를 적용할 수 있다.</li>
+</ul>
+<hr/>
+<h2 id="_5">한 줄 핵심</h2>
+<blockquote>
+<p><strong>벡터DB는 인덱스를 미리 만들어 저장(영속화)하고, ANN으로 빠르게 검색한다. "비싼 임베딩은 한 번, 검색은 매번"이 RAG 인프라의 핵심이다.</strong></p>
+</blockquote>
+<hr/>
+<h2 id="_6">다음 강 예고</h2>
+<p>15강까지 RAG의 검색 인프라(로드→청킹→임베딩→저장/검색)가 완성됐습니다. 16강 <strong>RAG QA 시스템</strong>에서 마지막 ⑤ 단계 — <strong>생성</strong> — 을 더해 RAG를 완성합니다. 검색한 문서를 근거로 LLM이 답하되, <strong>"문서에 없으면 모른다"</strong> 고 환각을 억제하고, <strong>출처를 함께 표시</strong>하는 실전 QA 시스템을 만듭니다.</p>
+</div>
+</div>
+<div class="pager"><a class="prv" href="08_인덱스-증분-업데이트.html"><span class="lbl">← 이전 절</span>08. 인덱스 증분 업데이트</a><a class="nxt" href="10_실습문제와-해답.html"><span class="lbl">다음 절 →</span>10. 실습문제와 해답</a></div>
+</div>
+</body></html>
