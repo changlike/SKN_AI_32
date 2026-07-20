@@ -1,0 +1,11 @@
+[실습]
+
+MCP에 Tool 추가
+- MySQL 툴 추가 
+	구현내용: MYSQL DB에 연동해서, 최종 답변을 DB TABLE에 저장 처리
+	- 테이블명: REPORT
+	- 컬럼명: TOPIC:STR, RESULT:STR, RESULT_TIME:DATETIME (답변완료까지 소요시간) 
+
+=> '생성 리포트 다운로드' 버튼 옆에 'DB에 저장' 버튼 추가 
+=> 'DB에 저장' 버튼 클릭 시, MYSQL 툴까지 연동 실행되게 작성
+	 
