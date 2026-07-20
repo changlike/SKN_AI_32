@@ -3,6 +3,8 @@
 
 # 데이터 분석 문맥 함수를 가져옵니다.
 from app.services.data_service import competitor_context, sales_context
+# MySQL 저장 함수를 가져옵니다.
+from app.services.db_service import save_report_to_db
 # 내부 RAG 검색 함수를 가져옵니다.
 from app.services.rag_service import search_knowledge
 # 웹 검색 함수를 가져옵니다.
@@ -39,5 +41,14 @@ def call_tool(tool_name: str, arguments: dict[str, object]) -> dict[str, object]
     if tool_name == "analyze_sales":
         # 결합된 내부 매출 문맥을 반환합니다.
         return {"tool": tool_name, "content": sales_context()}
+    # 최종 답변을 MySQL REPORT 테이블에 저장하는 도구를 처리합니다.
+    if tool_name == "save_report_to_db":
+        # 저장할 주제와 결과 본문을 읽습니다.
+        topic = str(arguments.get("topic", ""))
+        result = str(arguments.get("result", ""))
+        # 서비스 함수로 실제 저장을 수행합니다.
+        saved = save_report_to_db(topic, result)
+        # 저장 결과를 표준 사전으로 반환합니다.
+        return {"tool": tool_name, "content": saved}
     # 등록되지 않은 도구는 오류로 알립니다.
     raise ValueError(f"알 수 없는 MCP 도구입니다: {tool_name}")

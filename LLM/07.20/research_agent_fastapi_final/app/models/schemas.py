@@ -52,7 +52,7 @@ class ToolCallRequest(BaseModel):
     """MCP 호환 도구 직접 호출 요청 스키마입니다."""
 
     # 실행할 도구 식별자입니다.
-    tool_name: Literal["search_web", "search_knowledge", "analyze_competitors", "analyze_sales"]
+    tool_name: Literal["search_web", "search_knowledge", "analyze_competitors", "analyze_sales", "save_report_to_db"]
     # 도구에 전달할 문자열 인수 사전입니다.
     arguments: dict[str, Any] = Field(default_factory=dict)
 
