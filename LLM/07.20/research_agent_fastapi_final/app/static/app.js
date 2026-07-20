@@ -6,6 +6,12 @@ const statusBox = document.querySelector("#status");
 const traceList = document.querySelector("#trace");
 const metaBox = document.querySelector("#meta");
 const reportLink = document.querySelector("#report");
+const saveDbButton = document.querySelector("#saveDb");
+const saveDbStatus = document.querySelector("#saveDbStatus");
+
+// DB 저장 버튼이 사용할 최근 질문과 답변을 기억합니다.
+let lastTopic = "";
+let lastAnswer = "";
 
 // 예제 질문 버튼을 누르면 해당 질문을 입력창에 채웁니다.
 document.querySelectorAll("[data-q]").forEach((button) => {
@@ -34,6 +40,8 @@ sendButton.addEventListener("click", async () => {
     traceList.innerHTML = "";
     metaBox.textContent = "";
     reportLink.hidden = true;
+    saveDbButton.hidden = true;
+    saveDbStatus.textContent = "";
     try {
         // FastAPI 통합 채팅 엔드포인트를 호출합니다.
         const response = await fetch("/api/v1/chat", {
@@ -52,6 +60,10 @@ sendButton.addEventListener("click", async () => {
         if (!response.ok) throw new Error(data.detail || "요청 처리 실패");
         // 최종 답변을 화면에 출력합니다.
         answerBox.textContent = data.answer;
+        // DB 저장 버튼이 사용할 질문과 답변을 기억하고 버튼을 표시합니다.
+        lastTopic = message;
+        lastAnswer = data.answer;
+        saveDbButton.hidden = false;
         // 선택 경로와 처리 시간을 표시합니다.
         metaBox.textContent = `route=${data.route} / agent=${data.agent || "-"} / ${data.elapsed_seconds}초 / fallback=${data.used_fallback}`;
         // 각 trace 항목을 순서대로 목록에 추가합니다.
@@ -74,5 +86,35 @@ sendButton.addEventListener("click", async () => {
     } finally {
         // 성공 여부와 관계없이 버튼을 다시 사용할 수 있게 합니다.
         sendButton.disabled = false;
+    }
+});
+
+// DB에 저장 버튼의 클릭 이벤트를 등록합니다.
+saveDbButton.addEventListener("click", async () => {
+    // 중복 클릭을 막고 저장 중 상태를 표시합니다.
+    saveDbButton.disabled = true;
+    saveDbStatus.textContent = "MySQL에 저장하고 있습니다...";
+    try {
+        // MCP 호환 도구 직접 실행 엔드포인트로 저장 도구를 호출합니다.
+        const response = await fetch("/api/v1/tools/call", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                tool_name: "save_report_to_db",
+                arguments: {topic: lastTopic, result: lastAnswer}
+            })
+        });
+        // JSON 응답을 파싱합니다.
+        const data = await response.json();
+        // 오류 응답이면 서버의 detail 메시지를 예외로 변환합니다.
+        if (!response.ok) throw new Error(data.detail || "DB 저장 실패");
+        // 저장 완료 시각을 안내합니다.
+        saveDbStatus.textContent = `DB 저장 완료 (${data.content.result_time})`;
+    } catch (error) {
+        // 저장 실패 메시지를 표시합니다.
+        saveDbStatus.textContent = `저장 오류: ${error.message}`;
+    } finally {
+        // 성공 여부와 관계없이 버튼을 다시 사용할 수 있게 합니다.
+        saveDbButton.disabled = false;
     }
 });

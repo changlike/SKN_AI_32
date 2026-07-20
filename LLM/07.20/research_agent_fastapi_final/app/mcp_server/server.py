@@ -38,6 +38,13 @@ def sales_data_tool() -> str:
     return str(call_tool("analyze_sales", {})["content"])
 
 
+@mcp.tool()
+def save_report_to_db_tool(topic: str, result: str) -> str:
+    """최종 답변을 MySQL REPORT 테이블(TOPIC, RESULT, RESULT_TIME)에 저장합니다."""
+    # 공통 도구 실행기로 MySQL 저장을 수행합니다.
+    return str(call_tool("save_report_to_db", {"topic": topic, "result": result})["content"])
+
+
 # 모듈을 직접 실행한 경우에만 표준 입출력 MCP 서버를 시작합니다.
 if __name__ == "__main__":
     # PyCharm 또는 MCP 호스트가 자식 프로세스로 실행할 수 있도록 stdio 전송을 사용합니다.
