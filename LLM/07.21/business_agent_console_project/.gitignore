@@ -1,0 +1,9 @@
+.idea/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+reports/*.md
+reports/*.png
+!reports/.gitkeep
