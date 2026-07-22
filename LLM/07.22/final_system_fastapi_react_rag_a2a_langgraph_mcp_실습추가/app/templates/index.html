@@ -86,19 +86,46 @@
         </section>
     </section>
 
-    <!-- 탭 3: 요약 보고서 만들기 (틀만, 내용은 추후 연동) -->
+    <!-- 탭 3: 요약 보고서 만들기 -->
     <section id="tab-summary" class="tab-panel">
         <section class="panel">
             <h2>요약 보고서 만들기</h2>
-            <p class="hint">이전에 제공된 프로젝트 코드 연동 예정입니다.</p>
+            <p class="hint">cs_inquiries.csv를 카테고리·채널별로 집계하고, 불만·환불·교환 문의 원문을 근거로 LLM이 요약합니다.</p>
+            <div class="controls">
+                <label>LLM 공급자
+                    <select id="summaryProvider">
+                        <option value="openai">OpenAI</option>
+                        <option value="gemini">Gemini</option>
+                    </select>
+                </label>
+            </div>
+            <form id="summaryReportForm" class="chat-form single-action">
+                <button type="submit">요약 보고서 생성</button>
+            </form>
+            <div id="summaryReportResult" class="report-result"></div>
         </section>
     </section>
 
-    <!-- 탭 4: 임원용 매출 보고서 만들기 (틀만, 내용은 추후 연동) -->
+    <!-- 탭 4: 임원용 매출 보고서 만들기 -->
     <section id="tab-exec-sales" class="tab-panel">
         <section class="panel">
             <h2>임원용 매출 보고서 만들기</h2>
-            <p class="hint">이전에 제공된 프로젝트 코드 연동 예정입니다.</p>
+            <p class="hint">monthly_sales.csv를 집계해 전월 대비 증감률과 카테고리 분석을 LLM이 서술합니다. 월을 비우면 최신 달을 사용합니다.</p>
+            <div class="controls">
+                <label>대상 월 (선택)
+                    <input id="salesMonth" placeholder="예: 2026-05 (비우면 최신 달)">
+                </label>
+                <label>LLM 공급자
+                    <select id="salesProvider">
+                        <option value="openai">OpenAI</option>
+                        <option value="gemini">Gemini</option>
+                    </select>
+                </label>
+            </div>
+            <form id="salesReportForm" class="chat-form single-action">
+                <button type="submit">보고서 생성</button>
+            </form>
+            <div id="salesReportResult" class="report-result"></div>
         </section>
     </section>
 </main>
