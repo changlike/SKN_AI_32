@@ -12,31 +12,13 @@ from app.agents.specialists import delegate_to_agent, list_agent_cards
 # 환경설정과 데이터 목록 서비스를 가져옵니다.
 from app.core.settings import get_settings
 # 요청 및 응답 스키마를 가져옵니다.
-from app.models.schemas import (
-    A2AMessageRequest,
-    ChatRequest,
-    ChatResponse,
-    ComplaintRequest,
-    ComplaintResponse,
-    ExecSalesReportRequest,
-    ExecSalesReportResponse,
-    InquirySummaryReportRequest,
-    InquirySummaryReportResponse,
-    ToolRequest,
-    ToolResponse,
-)
+from app.models.schemas import A2AMessageRequest, ChatRequest, ChatResponse, ToolRequest, ToolResponse
 # 통합 LangGraph 실행 함수를 가져옵니다.
 from app.graph.workflow import run_workflow
 # MCP 로컬 호출 함수를 가져옵니다.
 from app.mcp_server.client import call_local_mcp_tool
-# 문의 처리 연계 부서 연결 서비스 함수를 가져옵니다.
-from app.services.complaint_service import handle_customer_inquiry
 # 데이터 파일 목록과 RAG 캐시 초기화 함수를 가져옵니다.
 from app.services.data_service import list_data_files
-# 임원용 매출 보고서 생성 함수를 가져옵니다.
-from app.services.exec_sales_report import generate_monthly_report
-# 요약 보고서(문의 집계) 생성 함수를 가져옵니다.
-from app.services.inquiry_summary_report import generate_summary_report
 from app.services.rag_service import reset_rag_cache
 
 # router는 /api/v1 아래에 등록될 API 라우터 객체입니다.
@@ -137,46 +119,6 @@ def reset_rag() -> dict[str, str]:
     reset_rag_cache()
     # 다음 정책 요청에서 다시 생성된다는 안내를 반환합니다.
     return {"message": "RAG 캐시를 초기화했습니다. 다음 정책 요청에서 다시 인덱싱합니다."}
-
-
-# complaint_handle 엔드포인트는 실행 질문(교환/환불)을 감지해 담당 부서 접수를 처리합니다.
-@router.post("/complaints/handle", response_model=ComplaintResponse)
-def complaint_handle(request: ComplaintRequest) -> ComplaintResponse:
-    """구현 1: 실행 질문이면 고정 응답과 함께 customer_complaint에 저장합니다."""
-    # 서비스 계층에서 의도 판단과 DB 저장을 모두 처리합니다.
-    result = handle_customer_inquiry(request.customer_id, request.message)
-    # 서비스 결과를 응답 스키마로 변환해 반환합니다.
-    return ComplaintResponse(**result)
-
-
-# inquiry_summary_report 엔드포인트는 고객 문의를 집계·서술·저장까지 한 번에 실행합니다.
-@router.post("/reports/inquiry-summary", response_model=InquirySummaryReportResponse)
-def inquiry_summary_report(request: InquirySummaryReportRequest) -> InquirySummaryReportResponse:
-    """cs_inquiries.csv를 집계하고 LLM 서술 요약 보고서를 생성해 저장합니다."""
-    # 데이터 파일 누락 등 사용자 입력성 오류를 HTTP 400으로 변환합니다.
-    try:
-        # 서비스 계층에서 집계, LLM 서술, 파일 저장을 모두 처리합니다.
-        result = generate_summary_report(request.provider)
-        # 결과 dict를 응답 스키마로 변환해 반환합니다.
-        return InquirySummaryReportResponse(**result)
-    except (FileNotFoundError, ValueError) as exc:
-        # 데이터 조회 단계에서 발생한 명확한 오류를 그대로 안내합니다.
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-
-
-# exec_sales_report 엔드포인트는 임원용 매출 보고서를 집계·서술·저장까지 한 번에 실행합니다.
-@router.post("/reports/executive-sales", response_model=ExecSalesReportResponse)
-def exec_sales_report(request: ExecSalesReportRequest) -> ExecSalesReportResponse:
-    """월간 매출 CSV를 집계하고 LLM 서술 보고서를 생성해 저장합니다."""
-    # 잘못된 월 지정, CSV 누락 등 사용자 입력성 오류를 HTTP 400으로 변환합니다.
-    try:
-        # 서비스 계층에서 집계, LLM 서술, 파일 저장을 모두 처리합니다.
-        result = generate_monthly_report(request.month, request.provider)
-        # 결과 dict를 응답 스키마로 변환해 반환합니다.
-        return ExecSalesReportResponse(**result)
-    except (FileNotFoundError, ValueError, IndexError, ZeroDivisionError) as exc:
-        # 데이터 조회/계산 단계에서 발생한 명확한 오류를 그대로 안내합니다.
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 # exercise_exchange는 실습문제 1 해답을 API로 실행합니다.
