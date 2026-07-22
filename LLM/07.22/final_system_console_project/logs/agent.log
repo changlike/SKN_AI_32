@@ -1,0 +1,55 @@
+2026-07-21 21:52:32,806 [INFO] final_cs_agent - 정책 RAG 인덱싱 시작: PDF 5개
+2026-07-21 21:52:32,807 [INFO] final_cs_agent - 정책 PDF 로드: #Uba64#Ubc84#Uc2ed#Uc815#Ucc45.pdf
+2026-07-21 21:52:33,045 [INFO] final_cs_agent - 정책 PDF 로드: #Uc81c#Ud488#Ub9e4#Ub274#Uc5bc_#Ub85c#Ubd07#Uccad#Uc18c#Uae30.pdf
+2026-07-21 21:52:33,058 [INFO] final_cs_agent - 정책 PDF 로드: #Uc81c#Ud488#Ub9e4#Ub274#Uc5bc_#Uc2a4#Ub9c8#Ud2b8#Uc6cc#Uce58.pdf
+2026-07-21 21:52:33,067 [INFO] final_cs_agent - 정책 PDF 로드: #Uc9c1#Uc6d0#Ud578#Ub4dc#Ubd81.pdf
+2026-07-21 21:52:33,081 [INFO] final_cs_agent - 정책 PDF 로드: #Ud658#Ubd88#Uad50#Ud658#Uc815#Ucc45.pdf
+2026-07-21 21:52:42,397 [INFO] final_cs_agent - 정책 RAG 인덱싱 완료: 청크 15개
+2026-07-21 21:53:12,892 [INFO] final_cs_agent - 정책 RAG 인덱싱 시작: PDF 5개
+2026-07-21 21:53:12,892 [INFO] final_cs_agent - 정책 PDF 로드: #Uba64#Ubc84#Uc2ed#Uc815#Ucc45.pdf
+2026-07-21 21:53:12,904 [INFO] final_cs_agent - 정책 PDF 로드: #Uc81c#Ud488#Ub9e4#Ub274#Uc5bc_#Ub85c#Ubd07#Uccad#Uc18c#Uae30.pdf
+2026-07-21 21:53:12,979 [INFO] final_cs_agent - 정책 PDF 로드: #Uc81c#Ud488#Ub9e4#Ub274#Uc5bc_#Uc2a4#Ub9c8#Ud2b8#Uc6cc#Uce58.pdf
+2026-07-21 21:53:12,988 [INFO] final_cs_agent - 정책 PDF 로드: #Uc9c1#Uc6d0#Ud578#Ub4dc#Ubd81.pdf
+2026-07-21 21:53:13,002 [INFO] final_cs_agent - 정책 PDF 로드: #Ud658#Ubd88#Uad50#Ud658#Uc815#Ucc45.pdf
+2026-07-21 21:53:13,863 [INFO] final_cs_agent - 정책 RAG 인덱싱 완료: 청크 15개
+2026-07-21 21:53:13,877 [INFO] final_cs_agent - 통합 에이전트 구성 완료: provider=openai, tools=4
+2026-07-21 21:53:13,877 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=console-user
+2026-07-21 21:53:21,849 [INFO] final_cs_agent - 에이전트 호출 성공: thread=console-user
+2026-07-21 21:53:32,786 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=demo-user-1001
+2026-07-21 21:53:39,416 [INFO] final_cs_agent - 에이전트 호출 성공: thread=demo-user-1001
+2026-07-21 21:53:39,416 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=demo-user-1001
+2026-07-21 21:53:46,507 [INFO] final_cs_agent - 에이전트 호출 성공: thread=demo-user-1001
+2026-07-21 21:53:46,507 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=demo-user-1001
+2026-07-21 21:53:56,068 [INFO] final_cs_agent - 에이전트 호출 성공: thread=demo-user-1001
+2026-07-21 21:54:51,652 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-a
+2026-07-21 21:54:58,557 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-a
+2026-07-21 21:54:58,557 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-b
+2026-07-21 21:55:00,476 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-b
+2026-07-21 21:55:00,476 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-a
+2026-07-21 21:55:04,244 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-a
+2026-07-21 21:55:04,245 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-b
+2026-07-21 21:55:09,274 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-b
+2026-07-22 11:50:42,297 [INFO] final_cs_agent - 정책 RAG 인덱싱 시작: PDF 5개
+2026-07-22 11:50:42,297 [INFO] final_cs_agent - 정책 PDF 로드: #Uba64#Ubc84#Uc2ed#Uc815#Ucc45.pdf
+2026-07-22 11:50:42,541 [INFO] final_cs_agent - 정책 PDF 로드: #Uc81c#Ud488#Ub9e4#Ub274#Uc5bc_#Ub85c#Ubd07#Uccad#Uc18c#Uae30.pdf
+2026-07-22 11:50:42,557 [INFO] final_cs_agent - 정책 PDF 로드: #Uc81c#Ud488#Ub9e4#Ub274#Uc5bc_#Uc2a4#Ub9c8#Ud2b8#Uc6cc#Uce58.pdf
+2026-07-22 11:50:42,571 [INFO] final_cs_agent - 정책 PDF 로드: #Uc9c1#Uc6d0#Ud578#Ub4dc#Ubd81.pdf
+2026-07-22 11:50:42,588 [INFO] final_cs_agent - 정책 PDF 로드: #Ud658#Ubd88#Uad50#Ud658#Uc815#Ucc45.pdf
+2026-07-22 11:50:49,277 [INFO] final_cs_agent - 정책 RAG 인덱싱 완료: 청크 15개
+2026-07-22 11:50:49,284 [INFO] final_cs_agent - 통합 에이전트 구성 완료: provider=openai, tools=4
+2026-07-22 11:50:49,284 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-a
+2026-07-22 11:50:55,598 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-a
+2026-07-22 11:50:55,598 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-b
+2026-07-22 11:50:58,043 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-b
+2026-07-22 11:50:58,043 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-a
+2026-07-22 11:51:01,553 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-a
+2026-07-22 11:51:01,553 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-b
+2026-07-22 11:51:06,364 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-b
+2026-07-22 11:51:26,735 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-a
+2026-07-22 11:51:30,012 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-a
+2026-07-22 11:51:30,012 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-b
+2026-07-22 11:51:31,147 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-b
+2026-07-22 11:51:31,147 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-a
+2026-07-22 11:51:35,011 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-a
+2026-07-22 11:51:35,011 [INFO] final_cs_agent - 에이전트 호출 시도 1/3: thread=exercise-user-b
+2026-07-22 11:51:38,829 [INFO] final_cs_agent - 에이전트 호출 성공: thread=exercise-user-b
