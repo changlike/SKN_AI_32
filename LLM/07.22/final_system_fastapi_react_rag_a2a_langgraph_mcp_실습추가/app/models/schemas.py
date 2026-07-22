@@ -82,6 +82,75 @@ class ComplaintResponse(BaseModel):
     cc_id: int | None = None
 
 
+# InquirySummaryReportRequest는 요약 보고서 만들기 탭의 입력 구조입니다.
+class InquirySummaryReportRequest(BaseModel):
+    """요약 보고서 서술에 사용할 LLM 공급자를 전달하는 요청 모델입니다."""
+
+    # provider는 보고서 서술에 사용할 LLM 공급자입니다.
+    provider: Literal["openai", "gemini"] = Field(default="openai")
+
+
+# InquirySummaryReportResponse는 문의 집계 수치와 LLM 서술 보고서를 함께 반환합니다.
+class InquirySummaryReportResponse(BaseModel):
+    """카테고리·채널별 집계와 마크다운 보고서, 저장 경로를 담는 응답 모델입니다."""
+
+    # total_count는 전체 문의 건수입니다.
+    total_count: int
+    # by_category는 카테고리별 문의 건수입니다.
+    by_category: dict[str, int]
+    # by_channel은 채널별 문의 건수입니다.
+    by_channel: dict[str, int]
+    # top_category는 건수가 가장 많은 카테고리입니다.
+    top_category: str
+    # top_category_count와 top_category_pct는 최다 카테고리의 건수와 비중(%)입니다.
+    top_category_count: int
+    top_category_pct: float
+    # samples는 LLM이 근거로 사용한 이슈성 문의 원문 샘플입니다.
+    samples: list[dict[str, str]]
+    # report_markdown은 LLM(또는 폴백 템플릿)이 작성한 보고서 본문입니다.
+    report_markdown: str
+    # saved_path는 보고서 마크다운 파일이 저장된 서버 경로입니다.
+    saved_path: str
+
+
+# ExecSalesReportRequest는 임원용 매출 보고서 탭의 입력 구조입니다.
+class ExecSalesReportRequest(BaseModel):
+    """분석 대상 월과 LLM 공급자를 전달하는 요청 모델입니다."""
+
+    # month는 분석할 달("YYYY-MM")이며, 비우면 CSV의 최신 달을 사용합니다.
+    month: str | None = Field(default=None, description="분석 대상 월. 예: 2024-04")
+    # provider는 보고서 서술에 사용할 LLM 공급자입니다.
+    provider: Literal["openai", "gemini"] = Field(default="openai")
+
+
+# ExecSalesReportResponse는 집계 수치와 LLM 서술 보고서를 함께 반환합니다.
+class ExecSalesReportResponse(BaseModel):
+    """확정 수치와 마크다운 보고서, 저장 경로를 담는 응답 모델입니다."""
+
+    # month는 분석된 대상 월입니다.
+    month: str
+    # prev_month는 비교 대상인 전월입니다.
+    prev_month: str
+    # total은 대상 월의 총매출입니다.
+    total: int
+    # prev_total은 전월 총매출입니다.
+    prev_total: int
+    # growth_pct는 전월 대비 증감률(%)입니다.
+    growth_pct: float
+    # top_category와 top_value는 매출 1위 카테고리와 금액입니다.
+    top_category: str
+    top_value: int
+    # second_category와 second_value는 매출 2위 카테고리와 금액입니다.
+    second_category: str
+    second_value: int
+    # by_category는 전체 카테고리별 매출입니다.
+    by_category: dict[str, int]
+    # report_markdown은 LLM(또는 폴백 템플릿)이 작성한 보고서 본문입니다.
+    report_markdown: str
+    # saved_path는 보고서 마크다운 파일이 저장된 서버 경로입니다.
+    saved_path: str
+
+
 # A2AMessageRequest는 에이전트 간 위임 메시지를 표현합니다.
 class A2AMessageRequest(BaseModel):
     """A2A 게이트웨이에 전달하는 에이전트 메시지 모델입니다."""

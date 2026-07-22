@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="layout">
+    <section class="hero">
+        <div>
+            <p class="eyebrow">FINAL SYSTEM · VERSION {{ version }}</p>
+            <h1>{{ app_name }}</h1>
+            <p>ReAct → RAG → A2A → LangGraph → MCP 통합 FastAPI 애플리케이션</p>
+        </div>
+        <a class="swagger" href="/docs" target="_blank">Swagger 열기</a>
+    </section>
+
+    <section class="architecture">
+        <div class="step"><b>1. ReAct</b><span>질문 분석과 도구 선택</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>2. RAG</b><span>정책 PDF 근거 검색</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>3. A2A</b><span>전문 에이전트 위임</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>4. LangGraph</b><span>상태·분기·흐름 제어</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>5. MCP</b><span>표준 도구 호출</span></div>
+    </section>
+
+    <section class="panel">
+        <div class="controls">
+            <label>LLM 공급자
+                <select id="provider">
+                    <option value="openai">OpenAI</option>
+                    <option value="gemini">Gemini</option>
+                </select>
+            </label>
+            <label>Thread ID
+                <input id="threadId" value="web-user-1001">
+            </label>
+        </div>
+        <div id="messages" class="messages">
+            <article class="message assistant">
+                <b>상담원</b>
+                <p>주문 조회, 상품 재고, FAQ, 환불·교환·멤버십 정책, 교환 신청을 요청해 보세요.</p>
+            </article>
+        </div>
+        <form id="chatForm" class="chat-form">
+            <textarea id="message" rows="3" placeholder="예: 주문 O000050 상태 알려줘" required></textarea>
+            <button type="submit">통합 워크플로우 실행</button>
+        </form>
+    </section>
+
+    <section class="panel">
+        <h2>실행 추적</h2>
+        <div id="trace" class="trace"><p>질문을 실행하면 LangGraph 단계가 표시됩니다.</p></div>
+    </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
