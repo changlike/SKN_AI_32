@@ -1,0 +1,47 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="torchvision" />
+          <option value="torchaudio" />
+          <option value="pytorch-lightning" />
+          <option value="torchmetrics" />
+          <option value="scikit-learn" />
+          <option value="matplotlib" />
+          <option value="notebook" />
+          <option value="ipykernel" />
+          <option value="numpy" />
+          <option value="torch" />
+          <option value="streamlit" />
+          <option value="transformers" />
+          <option value="accelerate" />
+          <option value="pandas" />
+          <option value="fastapi" />
+          <option value="uvicorn" />
+          <option value="SQLAlchemy" />
+          <option value="PyMySQL" />
+          <option value="python-dotenv" />
+          <option value="passlib" />
+          <option value="python-jose" />
+          <option value="python-multipart" />
+          <option value="pydantic" />
+          <option value="openai" />
+          <option value="pydantic-settings" />
+          <option value="langchain" />
+          <option value="langchain-community" />
+          <option value="langchain-openai" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStubPackagesAdvertiser" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="pandas" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
