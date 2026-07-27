@@ -1,0 +1,11 @@
+# RunPod의 CUDA 지원 PyTorch 템플릿에는 torch가 이미 설치된 경우가 많습니다.
+# 기존 CUDA와 맞는 torch를 유지하기 위해 별도 고정 설치하지 않습니다.
+transformers>=4.51.0,<5.0.0
+datasets>=3.5.0,<5.0.0
+trl>=0.18.0,<0.30.0
+peft>=0.15.0,<1.0.0
+accelerate>=1.6.0,<2.0.0
+bitsandbytes>=0.45.0
+safetensors>=0.5.0
+sentencepiece>=0.2.0
+python-dotenv>=1.1.0

@@ -1,0 +1,2 @@
+# vLLM은 CUDA 및 PyTorch 조합에 민감하므로 RunPod의 새 가상환경에 설치합니다.
+vllm>=0.8.5,<1.0.0
