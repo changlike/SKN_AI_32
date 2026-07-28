@@ -1,0 +1,16 @@
+/* 전체 페이지 색상과 글꼴을 지정합니다. */
+body{margin:0;background:#111827;color:#e5e7eb;font-family:Arial,"Noto Sans KR",sans-serif}
+/* 콘텐츠를 가운데 배치합니다. */
+main{width:min(1050px,94%);margin:32px auto}
+/* 기능 영역을 카드로 표시합니다. */
+section{margin-top:18px;padding:18px;border:1px solid #374151;border-radius:12px;background:#1f2937}
+/* 질문 입력창을 전체 너비로 표시합니다. */
+textarea{width:100%;box-sizing:border-box;padding:12px;background:#111827;color:#fff;border:1px solid #4b5563;border-radius:8px}
+/* 입력 컨트롤 간격을 지정합니다. */
+select,input,button{margin:10px 8px 0 0;padding:10px;border-radius:8px;border:1px solid #4b5563}
+/* 버튼을 강조합니다. */
+button{background:#2563eb;color:#fff;cursor:pointer}
+/* 출력 줄바꿈을 유지합니다. */
+pre{white-space:pre-wrap;word-break:break-word;background:#111827;padding:14px;border-radius:8px}
+/* 근거 카드를 구분합니다. */
+article{margin-top:10px;padding:12px;border-left:4px solid #60a5fa;background:#111827}
