@@ -1,0 +1,4 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DPO RAG</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main><h1>DPO Fine-tuned RAG Service</h1><p>SFT → DPO → 평가 → FAISS RAG → FastAPI</p><section><textarea id="question" rows="5" placeholder="환불은 언제까지 신청할 수 있습니까?"></textarea><div><select id="mode"><option value="rag">RAG 상담</option><option value="chat">모델 단독</option></select><input id="topK" type="number" min="1" max="10" value="3"><button id="send">실행</button></div></section><section><h2>답변</h2><pre id="answer">질문을 입력하십시오.</pre></section><section><h2>근거</h2><div id="sources">RAG 실행 시 표시됩니다.</div></section><section><h2>평가</h2><button id="evalBtn">평가 결과 불러오기</button><pre id="evaluation"></pre></section></main><script src="/static/app.js"></script></body></html>
