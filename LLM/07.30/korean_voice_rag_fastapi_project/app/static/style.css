@@ -1,0 +1,15 @@
+*{box-sizing:border-box} /* 모든 요소의 크기 계산 방식을 통일합니다. */
+body{margin:0;background:#f3f5f8;color:#1f2937;font-family:"Malgun Gothic",sans-serif} /* 기본 배경과 한글 글꼴을 설정합니다. */
+.container{width:min(960px,calc(100% - 32px));margin:32px auto} /* 콘텐츠 폭과 가운데 정렬을 설정합니다. */
+header{margin-bottom:20px} h1{margin:0 0 8px} header p{margin:0;color:#667085} /* 제목 영역을 정리합니다. */
+.card{margin-bottom:16px;padding:20px;background:white;border:1px solid #e4e7ec;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.05)} /* 카드 형태를 지정합니다. */
+.input-row{display:flex;gap:10px;margin-top:8px} /* 입력창과 마이크를 가로 배치합니다. */
+textarea{flex:1;min-height:90px;padding:12px;border:1px solid #cfd4dc;border-radius:10px;font-size:16px;resize:vertical} /* 질문 입력창을 디자인합니다. */
+button{border:0;border-radius:10px;padding:11px 16px;background:#315fba;color:white;font-size:15px;cursor:pointer} /* 버튼 공통 디자인입니다. */
+button:disabled{opacity:.55;cursor:not-allowed} .mic{width:64px;font-size:25px;background:#475467} /* 비활성 및 마이크 버튼 디자인입니다. */
+.mic.recording{background:#d92d20;animation:pulse 1s infinite} @keyframes pulse{50%{transform:scale(1.06)}} /* 녹음 상태 애니메이션입니다. */
+.actions{display:flex;align-items:center;gap:16px;margin-top:12px;flex-wrap:wrap} /* 실행 버튼과 체크박스를 정렬합니다. */
+.status,.box{margin-top:12px;padding:12px;border-radius:9px;background:#f8fafc;white-space:pre-wrap;line-height:1.7} /* 상태와 내용 박스를 디자인합니다. */
+.status.error{background:#fef3f2;color:#b42318} audio{width:100%;margin-top:14px} /* 오류와 오디오 디자인입니다. */
+.source{margin-top:8px;padding:10px;border-left:4px solid #315fba;background:#f8fafc;white-space:pre-wrap} /* 근거 문서 박스를 디자인합니다. */
+@media(max-width:640px){.input-row{flex-direction:column}.mic{width:100%}} /* 모바일에서 세로 배치합니다. */

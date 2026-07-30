@@ -1,0 +1,9 @@
+RAG source documents included in this project
+
+membership_policy.pdf              : 멤버십정책.pdf
+product_manual_robot_vacuum.pdf     : 제품매뉴얼_로봇청소기.pdf
+product_manual_smartwatch.pdf       : 제품매뉴얼_스마트워치.pdf
+employee_handbook.pdf               : 직원핸드북.pdf
+refund_exchange_policy.pdf          : 환불교환정책.pdf
+
+The filenames use ASCII characters so they remain visible after extraction on Windows.

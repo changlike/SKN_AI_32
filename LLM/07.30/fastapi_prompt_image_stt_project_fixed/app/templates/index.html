@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 한글과 영문을 정상적으로 표시하도록 UTF-8 인코딩을 지정합니다. -->
+    <meta charset="UTF-8">
+
+    <!-- 모바일과 데스크톱에서 올바른 화면 배율을 사용하도록 지정합니다. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 브라우저 탭에 애플리케이션 이름을 표시합니다. -->
+    <title>{{ app_name }}</title>
+
+    <!-- 페이지 디자인을 담당하는 CSS 파일을 연결합니다. -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- 전체 페이지 콘텐츠를 감싸는 메인 영역입니다. -->
+    <main class="page-shell">
+        <!-- 애플리케이션 제목과 프롬프트 처리 방식을 안내합니다. -->
+        <section class="hero">
+            <div class="brand">AI</div>
+            <h1>Korean Prompt & Voice Image Studio</h1>
+            <p>
+                한국어 프롬프트를 자동으로 영어 번역하고 핵심 피사체를 보강하여
+                요청한 장면과 무관한 이미지 생성을 줄입니다.
+            </p>
+            <small>Image model: {{ model_id }}</small>
+        </section>
+
+        <!-- Google 검색창과 유사한 이미지 생성 입력 폼입니다. -->
+        <section class="search-area">
+            <form id="generation-form">
+                <div class="search-box">
+                    <!-- 사용자가 원하는 장면을 한국어 또는 영어로 입력합니다. -->
+                    <input
+                        id="prompt-input"
+                        type="text"
+                        maxlength="2000"
+                        autocomplete="off"
+                        placeholder="예: 호숫가에 자리한 아늑한 통나무집, 일출, 사실적인 사진"
+                        required
+                    >
+
+                    <!-- 브라우저 마이크 녹음을 시작하거나 중지합니다. -->
+                    <button
+                        id="microphone-button"
+                        class="icon-button"
+                        type="button"
+                        aria-label="마이크 녹음 시작"
+                        title="마이크로 프롬프트 입력"
+                    >
+                        🎙️
+                    </button>
+
+                    <!-- 프롬프트 기반 이미지 생성 작업을 요청합니다. -->
+                    <button
+                        id="generate-button"
+                        class="primary-button"
+                        type="submit"
+                    >
+                        이미지 생성
+                    </button>
+                </div>
+
+                <!-- 사용자가 이미지에서 제외할 요소를 입력합니다. -->
+                <label class="field">
+                    <span>Negative prompt</span>
+                    <textarea
+                        id="negative-prompt-input"
+                        rows="2"
+                    >low quality, blurry, distorted, deformed, bad anatomy, watermark, text, logo</textarea>
+                </label>
+
+                <!-- 이미지 생성 세부 옵션을 반응형 격자로 배치합니다. -->
+                <div class="options-grid">
+                    <label class="field">
+                        <span>추론 단계</span>
+                        <input id="steps-input" type="number" min="1" max="100" value="{{ default_steps }}">
+                    </label>
+
+                    <label class="field">
+                        <span>Guidance</span>
+                        <input id="guidance-input" type="number" min="0" max="20" step="0.5" value="{{ default_guidance }}">
+                    </label>
+
+                    <label class="field">
+                        <span>가로</span>
+                        <input id="width-input" type="number" min="256" max="1024" step="8" value="{{ default_width }}">
+                    </label>
+
+                    <label class="field">
+                        <span>세로</span>
+                        <input id="height-input" type="number" min="256" max="1024" step="8" value="{{ default_height }}">
+                    </label>
+
+                    <label class="field">
+                        <span>중간 저장 간격</span>
+                        <input id="save-interval-input" type="number" min="1" max="50" value="{{ default_save_interval }}">
+                    </label>
+
+                    <label class="field">
+                        <span>Seed</span>
+                        <input id="seed-input" type="number" min="0" max="2147483647" placeholder="빈 값은 무작위">
+                    </label>
+                </div>
+            </form>
+
+            <!-- 마이크 녹음 및 STT 상태를 표시합니다. -->
+            <div id="microphone-status" class="status-box idle">
+                <span class="status-dot"></span>
+                <span id="microphone-status-text">마이크 대기 상태</span>
+            </div>
+
+            <!-- 저장된 음성과 STT 텍스트 파일 링크를 표시합니다. -->
+            <div id="recording-links" class="file-links hidden">
+                <a id="audio-link" href="#" target="_blank">녹음 파일</a>
+                <a id="transcript-link" href="#" target="_blank">STT 텍스트</a>
+            </div>
+        </section>
+
+        <!-- 한국어 원문이 어떤 영어 프롬프트로 변환되었는지 표시합니다. -->
+        <section id="translation-section" class="panel hidden">
+            <div class="panel-heading">
+                <h2>프롬프트 자동 변환</h2>
+                <span id="language-badge" class="badge">분석 중</span>
+            </div>
+
+            <div class="translation-grid">
+                <div>
+                    <h3>정리된 원문</h3>
+                    <p id="cleaned-prompt-display">-</p>
+                </div>
+
+                <div>
+                    <h3>영어 번역</h3>
+                    <p id="translated-prompt-display">-</p>
+                </div>
+
+                <div class="wide-item">
+                    <h3>실제 이미지 모델 입력</h3>
+                    <p id="enhanced-prompt-display">-</p>
+                </div>
+
+                <div class="wide-item">
+                    <h3>자동 보정 Negative prompt</h3>
+                    <p id="final-negative-display">-</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 모델 로딩과 노이즈 제거 진행률을 표시합니다. -->
+        <section id="progress-section" class="panel hidden">
+            <div class="panel-heading">
+                <h2>생성 진행 상태</h2>
+                <span id="status-badge" class="badge">대기</span>
+            </div>
+
+            <p id="job-message">작업을 준비하고 있습니다.</p>
+
+            <div class="progress-track">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div class="progress-meta">
+                <span id="step-progress">0 / 0 단계</span>
+                <span id="seed-display">Seed: -</span>
+            </div>
+        </section>
+
+        <!-- 최종 이미지와 원문 및 번역 프롬프트를 함께 표시합니다. -->
+        <section id="result-section" class="panel hidden">
+            <div class="panel-heading">
+                <h2>최종 생성 이미지</h2>
+                <a id="metadata-link" class="badge link-badge" href="#" target="_blank">
+                    메타데이터
+                </a>
+            </div>
+
+            <div class="result-grid">
+                <img id="final-image" src="" alt="프롬프트 기반 최종 생성 이미지">
+
+                <div class="prompt-info">
+                    <h3>사용자 원본 Prompt</h3>
+                    <p id="result-prompt"></p>
+
+                    <h3>영어 번역 Prompt</h3>
+                    <p id="result-translated-prompt"></p>
+
+                    <h3>최종 Negative prompt</h3>
+                    <p id="result-negative-prompt"></p>
+
+                    <h3>생성 설정</h3>
+                    <p id="result-options"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 디퓨전 중간 단계에서 확인한 이미지를 표시합니다. -->
+        <section id="steps-section" class="panel hidden">
+            <div class="panel-heading">
+                <h2>노이즈 제거 단계별 이미지</h2>
+                <span id="image-count-badge" class="badge">0장</span>
+            </div>
+
+            <div id="steps-gallery" class="gallery"></div>
+        </section>
+
+        <!-- 브라우저 또는 서버 오류 메시지를 표시합니다. -->
+        <section id="error-section" class="error-panel hidden">
+            <strong>오류</strong>
+            <p id="error-message"></p>
+        </section>
+    </main>
+
+    <!-- 녹음, STT, 프롬프트 변환과 이미지 생성을 처리하는 JavaScript를 연결합니다. -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

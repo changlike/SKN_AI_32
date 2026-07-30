@@ -1,0 +1,38 @@
+# FastAPI 웹 프레임워크를 설치합니다.
+fastapi>=0.115,<1.0
+
+# FastAPI 애플리케이션을 실행할 ASGI 서버를 설치합니다.
+uvicorn[standard]>=0.34,<1.0
+
+# HTML 템플릿 렌더링 기능을 설치합니다.
+jinja2>=3.1,<4.0
+
+# multipart/form-data 방식의 음성 파일 업로드 기능을 설치합니다.
+python-multipart>=0.0.20,<1.0
+
+# SDXL, 번역 모델과 STT의 텐서 연산에 사용할 PyTorch를 설치합니다.
+torch>=2.5,<3.0
+
+# SDXL 텍스트-이미지 파이프라인과 스케줄러를 설치합니다.
+diffusers>=0.35,<1.0
+
+# MarianMT 번역 모델과 SDXL 텍스트 인코더 기능을 설치합니다.
+transformers>=4.48,<6.0
+
+# 모델 CPU 오프로딩과 장치 관리를 지원합니다.
+accelerate>=1.2,<2.0
+
+# 안전한 모델 가중치 파일 로딩 기능을 설치합니다.
+safetensors>=0.5,<1.0
+
+# MarianTokenizer가 사용하는 SentencePiece 토크나이저를 설치합니다.
+sentencepiece>=0.2,<1.0
+
+# 생성 이미지 파일 저장 기능을 설치합니다.
+Pillow>=10.4,<13.0
+
+# 로컬 Whisper 음성 인식 기능을 설치합니다.
+faster-whisper>=1.1,<2.0
+
+# 프로젝트 루트의 .env 설정 파일을 자동으로 읽습니다.
+python-dotenv>=1.0,<2.0
