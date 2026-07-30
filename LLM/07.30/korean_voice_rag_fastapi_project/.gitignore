@@ -1,0 +1,13 @@
+# PyCharm 개인 설정을 제외합니다.
+.idea/
+# Python 가상환경을 제외합니다.
+.venv/
+# Python 캐시 파일을 제외합니다.
+__pycache__/
+*.pyc
+# 실제 환경변수 파일을 제외합니다.
+.env
+# 실행 결과 파일을 제외합니다.
+storage/audio/
+storage/uploads/
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"> <!-- 한글 인코딩을 지정합니다. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 화면을 설정합니다. -->
+  <title>한국어 음성 RAG 서비스</title> <!-- 브라우저 제목입니다. -->
+  <link rel="stylesheet" href="/static/style.css"> <!-- CSS 파일을 연결합니다. -->
+</head>
+<body>
+<main class="container">
+  <header><h1>한국어 음성 RAG 상담 서비스</h1><p>STT → RAG → 파인튜닝 LLM → 한국어 TTS</p></header>
+  <section class="card">
+    <label for="question">문의 내용</label>
+    <div class="input-row"><textarea id="question" placeholder="문의 내용을 입력하거나 마이크로 말하세요."></textarea><button id="mic" class="mic">🎤</button></div>
+    <div class="actions"><button id="ask">텍스트로 질문</button><label><input id="autoplay" type="checkbox" checked> 음성 자동 재생</label></div>
+    <div id="status" class="status">준비됨</div>
+  </section>
+  <section class="card"><h2>인식된 질문</h2><div id="recognized" class="box">아직 질문이 없습니다.</div></section>
+  <section class="card"><h2>답변</h2><div id="answer" class="box">답변이 표시됩니다.</div><audio id="audio" controls></audio><small id="mode"></small></section>
+  <section class="card"><h2>검색 근거</h2><div id="sources">검색 근거가 표시됩니다.</div></section>
+</main>
+<script src="/static/app.js"></script> <!-- 웹 동작 스크립트를 연결합니다. -->
+</body>
+</html>
