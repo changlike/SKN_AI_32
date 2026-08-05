@@ -1,0 +1,48 @@
+<!DOCTYPE html> <!-- 이 문서에 사용된 html 의 종류를 지정하고 표시하는 태그임, 현재는 html5 로 지정됨 -->
+<html lang="ko"> <!-- html 문서의 시작을 뜻하는 태그임 -->
+<head> <!-- head 태그에서는 문서의 설정과 관련된 태그들을 지정함, 사용할 수 있는 태그가 정해져 있음 -->
+    <meta charset="UTF-8"> <!-- 문서의 메타 정보들을 지정할 때 사용하는 태그임, 단일 (닫기 태그없음) 태그임 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testHTML</title> <!-- 문서의 제목 지정용 태그임, 브라우저 상단 제목탭에 표시됨 -->
+</head>
+<body> <!-- 브라우저에서 보여지는 페이지의 내용을 작성하는 부분임 -->
+   <header>
+        <h1>HTML5 연습용 프로젝트 : Welcome Page (index.html)</h1>
+        <!-- headline 1 의 줄임말, 제목글자 표시용 태그임, 자동 줄바꿈 기능 있음-->
+         웰컴 페이지는 웹 애플리케이션(웹 사이트)의 첫페이지로 자동 제공되는 페이지를 말한다.<br>  
+        <nav>
+            <ul>
+                <li><a href="./views/test/testTable.html">table 태그 연습 페이지로 이동</a></li>
+                <!-- href="연결할 대상파일.확장자" 
+                    경로(path)를 포함해서 대상 파일을 지정할 수도 있음
+                    대상 파일이 같은 폴더에 있으면, 그냥 "파일명.확장자" 로 표기하면 됨
+                    다른 폴더에 대상 파일이 있는 경우, 경로 포함 파일을 지정해야 함
+
+                    경로 표기 방법은 상대경로와 절대경로 두 가지 방법이 있음
+                    1. 상대경로로 대상을 지정하는 방법
+                        ./ : 현재 폴더를 의미함
+                        ../ : 상위 폴더를 의미함 (한단계 위 폴더를 의미함)
+                        예) 현재 문서인 index.html 이 속한 폴더가 webapp (현재 폴더) 임
+                            연결할 대상 파일은 webapp/views/test 폴더 아래의 testTable.html 임
+                            href="./views/test/testTable.html"
+                            ./ 는 생략해도 됨. href="views/test/testTable.html"
+
+                    2. 절대경로로 대상을 지정하는 방법
+                        무조건 /로 시작함 : 프로젝트의 루트(root == webapp 폴더임)에서 시작한다는 의미임
+                        주의 : 절대경로 작동은 웹 서버가 구동된 상태에서 동작함
+
+                        vscode 에서 절대경로를 작동시키려면 추가 작업이 필요함 : 확장에서 'Live Server' 설치함
+                        
+                        다음으로 루트 폴더로 사용할 폴더(webapp)를 열기함
+                        구동시킬 파일이름 위에서 마우스 오른쪽 클릭함 - 서버 시작시 자동으로 열기 선택함
+                -->
+                <li><a href="/views/test/testForm.html">form 태그 연습 페이지로 이동</a></li>
+                <li><a href="/views/test/testSimentic.html">시맨틱 태그 연습 페이지로 이동</a></li>
+                <li><a href="">orderform.html</a></li>
+                <li><a href="">productform.html</a></li>
+            </ul>
+        </nav>       
+   </header> 
+   <hr>
+</body>
+</html>  <!-- html 문서의 끝을 뜻하는 태그임 -->

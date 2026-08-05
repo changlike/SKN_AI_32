@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testSimentic</title>
+    <style type="text/css">
+        header > nav > ul > li > a {
+            text-decoration: none; /* a 태그에 밑줄 표시 없앰 */
+        }
+        header > nav > ul {
+            list-style: none; /* ul 태그의 목록 앞에 기호 표시 없앰 */
+        }
+        header > nav > ul > li {
+            float: left;  /* li 태그들을 왼쪽부터 1234순으로 옆으로 배치함 */
+            width: 90px;
+            height: 25px;
+            background-color: #99ccff;
+            margin-right: 10px;
+            text-align: center;
+            font-size: 9pt;
+            font-weight: bold;
+            padding-top: 5px;
+        }
+        hr {
+            clear: both;  /* hr 태그에서 float 속성을 해제함 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 시맨틱(Simentic) 태그 : 태그명으로 용도를 알 수 있는 태그
+        웹표준 html5에서 추가된 태그임
+        header, section, article, aside, footer, hgroup, figure & figcaption, time, address 등 
+    -->
+    <header> <!-- 웹페이지의 머리글 영역을 표시할 때 사용하는 태그, 로고나 메뉴바 등이 표시되는 영역임 -->
+        <img src="/resources/images/twitter.jpg" width="50" alt="로고">
+        <h1>testHTMLProject</h1>
+        <nav> <!-- 메뉴바 구역 만들 때 사용함 -->
+            <ul> <!-- unorder list : 순번 없는 목록, 목록 앞에 기호 표시됨 -->
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+                <li><a href="#">메뉴4</a></li>
+                <li><a href="#">메뉴5</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+
+    <section> <!-- 제목, 부제목, 내용으로 구성하는 본문이 있을 때 구역 표시용으로 사용함 -->
+        <hgroup> <!-- 제목과 부제목을 하나의 그룹으로 묶을 때 사용함 -->
+            <h1>시맨틱 태그 연습</h1>
+            <h3>본문 내용 표시를 위한 section 영역</h3>
+        </hgroup>
+        <figure> <!-- 그림과 설명을 하나로 묶을 때 사용함 -->
+            <img src="/resources/images/flower4.jpg" width="150" height="100">
+            <img src="/resources/images/flower5.jpg" width="150" height="100">
+            <img src="/resources/images/flower6.jpg" width="150" height="100">
+            <figcaption>
+                <b>산굼부리의 가을</b> - 단풍든 담쟁이, 바람 가득한 억새바다, 그리고 억샛길
+            </figcaption>
+        </figure>
+    </section>
+    <hr>
+    <footer> <!-- 웹 페이지의 바닥글 영역을 표시할 때 사용함, 회사정보와 저작권 정보 등 -->
+        <center>
+            copyright@test.org &nbsp; 2025-09-12 developer <br>
+            Tel : 02-1234-5678, Fax : 02-1234-5679 <br>
+            <address>서울시 ibm k-digital</address>
+        </center>
+    </footer>
+</body>
+</html>
