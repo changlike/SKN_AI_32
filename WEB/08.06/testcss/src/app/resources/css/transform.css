@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/*
+    transform.css
+    transform.html 에 사용할 스타일시트 작성 파일
+    transform, transition 속성(property) 테스트용
+*/
+
+* { margin: 0;  padding: 0; }  /* 모든 태그들의 바깥여백(margin), 안쪽여백(padding) 모두 없앰 */
+
+div.myphoto1 {
+    position: relative;
+    left: 30px;
+    top: 30px;
+    width: 120px;
+    height: 100px;
+    background: #cbcb96;
+    box-shadow: 1px 1px 5px rgba(0,0,0, 0.5);    
+    /* div 안의 콘텐츠를 정가운데 배치되게 하려면 */
+    display: flex;
+    justify-content: center; /* 가로 중앙 */
+    align-items: center;     /* 세로 중앙 */
+    /* 원래 상태로 돌아올 때의 에니메이션 적용한다면 */
+    transition: all 3s linear;   /* 변화가 되는 property, 변화시간, 타임함수 */
+    -webkit-transition: all 3s linear; 
+    -moz-transition: all 3s linear; 
+    -o-transition: all 3s linear;
+} 
+
+/* 클래스명이 myphoto1인 div 태그에 마우스 커서를 갖다대면 을 의미함 */
+div.myphoto1:hover {
+    /*회전*/
+    /* transform: rotate(25deg);
+    -webkit-transform: rotate(25deg);
+    -moz-transform: rotate(25deg);
+    -o-transform: rotate(25deg);
+    -ms-transform: rotate(25deg); */
+    /*확대*/
+    /* transform: scale(2, 2);
+    -webkit-transform: scale(2, 2);
+    -moz-transform: scale(2, 2);
+    -o-transform: scale(2, 2);
+    -ms-transform: scale(2, 2); */
+    /*왜곡*/
+    /* transform: skew(15deg, 15deg);
+    -webkit-transform: skew(15deg, 15deg);
+    -moz-transform: skew(15deg, 15deg);
+    -o-transform: skew(15deg, 15deg);
+    -ms-transform: skew(15deg, 15deg); */
+    /*이동*/
+    transform: translate(100px, 100px);
+    -webkit-transform: translate(100px, 100px);
+    -moz-transform: translate(100px, 100px);
+    -o-transform: translate(100px, 100px);
+    -ms-transform: translate(100px, 100px);
+
+    /* 해당 태그에 hover 해서 변형이 될 때 에니메이션 적용한다면 */
+    transition: all 2s ease-out;   /* 변화가 되는 property, 변화시간, 타임함수 */
+    -webkit-transition: all 2s ease-out; 
+    -moz-transition: all 2s ease-out; 
+    -o-transition: all 2s ease-out;  
+}

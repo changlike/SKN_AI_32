@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>accordian</title>
+    <!-- 전역 스타일시트 -->
+    <style type="text/css">
+        .accordionMenu {
+            font: 12px/20px 돋움;  /* css 속성 단축 표기(shorthand) */
+            /* font: [font-size]/[line-height] [font-family];  */
+            color:#424242;
+            background:#fff;
+            padding:10px;
+            width:500px;
+            margin:0;
+        }
+        .accordionMenu h1 {
+            margin:0;
+            font-size:20px;
+            text-shadow:2px 2px 2px #aeaeae;
+            /* text-shadow: 가로옵셋 세로옵셋 블러사이즈 그림자색; 
+                box-shadow 도 동일함
+                가로옵셋(offset) : 대상에게서 좌우로 떨어트릴 간격 (양수: 오른쪽, 음수: 왼쪽)
+                세로옵셋 : 대상에게서 위아래로 떨어트릴 간격 (양수: 아래쪽, 음수: 위쪽)
+                블러(blur) 사이즈 : 그림자가 그려질(표시될) 면적 (뿌옇게 흐리게 표시됨)
+            */
+        }
+        .accordionMenu h2{
+            margin:5px 0;
+            padding:0;
+        }
+
+        .accordionMenu h2 a {
+            font-size:15px;
+            display: block;  /* a 태그 사각영역을 마우스 작동 구역으로 지정함 */
+            font-weight: normal;
+            color:#424242;
+            text-shadow:2px 2px 2px #aeaeae;
+            text-decoration: none;
+            margin:0;
+            padding:10px;
+            background:#8f8f8f;
+        }
+
+        .accordionMenu h2 a {
+            font-size:15px;
+            display:block;
+            font-weight:normal;
+            color:#424242;
+            text-shadow:2px 2px 2px #aeaeae;
+            text-decoration:none;
+            margin:0;
+            padding:10px;
+            background:-moz-linear-gradient(top,#cecece,#8f8f8f);
+            background:-webkit-gradient(linear,left top, left bottom, from(#cecece), to(#8f8f8f));
+            /* 과거 Internet Explorer 전용 구식 CSS 문법임, 
+                gradient(그레디언트) 효과를 주기 위해 사용하던 Microsoft 전용 필터(ActiveX 기반) */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffcecece, endColorstr=#ff8f8f8f);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffcecece, endColorstr=#f8f8f8f)";
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+
+        .accordionMenu :target h2 a,
+        .accordionMenu h2 a:focus,
+        .accordionMenu h2 a:hover,
+        .accordionMenu h2 :active {
+            background:#2288dd;
+            background:-moz-linear-gradient(top,#6bb2ff,#2288dd);
+            background:-webkit-gradient(linear,left top, left bottom, from(#6bb2ff), to(#2288dd));
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#6bb2ff, endColorstr=#2288dd);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff6bb2ff, endColorstr=#ff2288dd)";
+            color:#fff;
+        }
+
+        /* 아코디언 에니메이션 효과 지정 */
+        .accordionMenu p {
+            padding:0 10px;
+            margin:0;
+            height:0;
+            overflow:hidden;  /* 설정하지 않으면 p 태그 안의 내용이 div 밖으로 빠져나와서 보이게 됨 */
+            /* overflow:hidden; 을 지정해야 안 보이게 됨 */
+            -moz-transition: height 0.5s ease-in;
+            -webkit-transition: height 0.5s ease-in;
+            -o-transition: height 0.5s ease-in;
+            transition: height 0.5s ease-in;
+        }
+
+        .accordionMenu :target p{
+            overflow: auto;  /* p 태그의 내용이 보여지게 됨 */
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="accordionMenu">
+        <h1>아코디언 메뉴</h1>
+        <div id="html5" class="menuSection">
+            <h2><a href="#html5">HTML5</a></h2>
+            <p>HTML5는 HTML의 차기 주요 제안 버전으로 월드 와이드 웹의 핵심 마크업 언어이다. 2004년 6월 Web Hypertext Application Technology Working Group(WHATWG)에서 웹 애플리케이션 1.0이라는 이름으로 세부 명세 작업을 시작하였다. 2013년 4월 현재에도 개발 중이다.
+			HTML5는 HTML 4.01, XHTML 1.0, DOM Level 2 HTML에 대한 차기 표준 제안이다. 최신 멀티미디어 콘텐츠를 브라우저에서 쉽고 용이하게 볼 수 있게하는 것을 목적으로 한다.</p>
+        </div>
+        <div id="css3" class="menuSection">
+            <h2><a href="#css3">CSS3</a></h2>
+            <p>css는 웹페이지의 스타일과 레이아웃등을 제어하는 언어
+			css3는 css의 제일 최신 표준이라고 생각하시면 됩니다. W3C라는 단체에서 아직도 꾸준히 개발중
+			대부분 브라우저에서 구현이 되는데 익스플로러는 	css3는 모듈로 분활
+			말 그대로 텍스트에다가 포토샵으로 말고 코드로 효과를 주거나 이미지에 애니메이션을 준다거나 한다 
+			예전에 자바스크립트로 어렵게 구현했던 것을 깔끔하고 손쉽고 배우기 쉬운 코드로 구현할 수 있습니다.
+            </p>
+        </div>
+        <div id="api" class="menuSection">
+            <h2><a href="#api">API</a></h2>
+            <p>Opensocial Javascript API and Opensocial Lightweight Javascript API
+			The Naver Social App Platform provides opensocial Javascript API (hereinafter, Opensocial API) by default, and adds “opensocial-0.9” in the feature property of the <Require> element.
+			In opensocial specification v0.9, opensocial lightweight Javascript API (hereinafter, opensocial lightweight API), which is a set of new APIs, is newly included. Opensocial lightweight API provides all the main functions of existing opensocial APIs, but much simpler to use. Opensocial lightweight API adds “osapi” library. </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>  <!-- html5 의미함 -->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inlineCSS</title>
+</head>
+<body>
+    <header>
+        <hgroup>
+            <h1>인라인 스타일시트 적용 연습 페이지</h1>
+            <h3>html 시작태그에 style 속성(attribute)을 사용해서 
+                직접 태그에 css 를 적용하는 방식
+            </h3>
+        </hgroup>
+    </header>
+    <hr>
+    <section>
+        <h4 style="color: red;font-size: 36pt;font-family: 궁서체;">인라인 스타일시트는 일회용임, 여러 태그에 반복 사용은 못 함</h4>
+        <p style="box-shadow: 2px 2px 10px black; width: 500px; height: 150px; background-color: orange; border: 2px solid green; border-radius: 50px;">
+            모든 html 태그에 사용할 수 있는 속성들이 있음 <br>
+            <ul>
+                <li>id="아이디명" : 아이디명은 문서 안에서 유일한 이름이어야 함</li>
+                <li>class="클래스명" 또는 class="클래스명 하위클래스명" : 여러 태그에 같은 클래스명을 지정할 수 있음. 
+                    하나의 그룹으로 묶어줄 때 이용함
+                </li>
+                <li>style="css속성:값;css속성2:값;css속성3:값;.........." : 인라인 스타일시트 적용시 사용함</li>
+                <li>name="이름" : 필요시 같은 이름이 여러번 사용될 수도 있음</li>
+            </ul>
+        </p>
+    </section>
+</body>
+</html>

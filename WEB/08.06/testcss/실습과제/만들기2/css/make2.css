@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+/* 배경이미지 지정 (images/back_1.gif가 make2.html과 같은 폴더의 images 안에 있어야 함) */
+body {
+  background: url("images/back_1.gif");
+}
+
+
+/* ===== 전체 링크 공통 스타일 ===== */
+a {
+  text-decoration: none;
+  color: red;
+  outline: none;   /* 클릭 시 브라우저가 자동으로 그리는 테두리 제거 */
+}
+a:hover { color: #ccc; }
+
+
+/* ===== header : nav를 위에 겹치게 배치하기 위해 float 사용 ===== */
+header {
+  width: 100%;
+  background: rgba(0,0,0,.3);
+  float: left;
+}
+
+header nav {
+  text-align: right;
+  padding: 15px;
+  background: rgba(102,102,102,.2);   /* 원본 자료의 rgba(666,666,666,.2)는 255를 넘는 값이라 실제로는 흰색 처리됨 → 정상 범위값으로 수정 */
+  box-shadow: #000 2px 2px 0;
+  -webkit-box-shadow: #000 2px 2px 0;
+  -moz-box-shadow: #000 2px 2px 0;
+}
+
+header nav ul {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+/* li를 inline으로 바꿔서 메뉴가 가로 한 줄로 나열되게 함 */
+header nav ul li {
+  display: inline;
+  margin-left: 15px;
+}
+
+/* 메뉴 버튼 모양 잡기 + hover 시 부드럽게 변할 속성 예약(transition) */
+header nav ul li a {
+  background: #fc9200;
+  display: inline-block;
+  padding: 7px 10px 8px;
+  color: #fff;
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+
+  box-shadow: rgba(0,0,0,.7) 1px 1px 9px;
+  -webkit-box-shadow: rgba(0,0,0,.7) 1px 1px 9px;
+  -moz-box-shadow: rgba(0,0,0,.7) 1px 1px 9px;
+
+  text-shadow: rgba(0,0,0,.3) 0 -1px 1px;
+  border-bottom: rgba(0,0,0,.3) 1px solid;
+
+  /* transition-property/duration을 콤마로 여러 개 지정 = 속성마다 다른 시간도 줄 수 있음 */
+  transition-property: background-color, border;
+  transition-duration: 1s, 1s;
+  -webkit-transition-property: background-color, border;
+  -webkit-transition-duration: 1s, 1s;
+  -moz-transition-property: background-color, border;
+  -moz-transition-duration: 1s, 1s;
+  -o-transition-property: background-color, border;
+  -o-transition-duration: 1s, 1s;
+}
+
+/* 마우스 오버 시 위에서 예약한 background-color, border가 1초 동안 서서히 변함 */
+header nav ul li a:hover {
+  background-color: red;
+  color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+
+/* ===== #main : 본문 전체를 감싸는 박스 ===== */
+#main {
+  width: 700px;
+  margin: 30px auto;   /* 가운데 정렬 */
+  padding: 15px;
+  background: rgba(0,0,0,.8);
+  color: #fff;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+}
+
+#main_a p {
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: 1px -1px 1px rgba(255,255,255,.5);   /* 원본 자료의 rgba(555,555,555,.5)도 255 초과값이라 흰색 기준으로 수정 */
+  margin: 3em 0;
+}
+
+
+/* ===== #minaver 3단 박스 레이아웃 (a: 왼쪽, b: 가운데, c: 오른쪽) ===== */
+#minaver { float: left; }
+
+#minaver_a, #minaver_b, #minaver_c {
+  min-height: 100px;
+  margin-bottom: 1em;
+}
+
+#minaver_a {
+  width: 300px;
+  margin-top: 3em;
+  float: left;
+  padding: 5px;
+  color: rgba(0,0,0,.7);
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  box-shadow: rgba(0,0,0,1) 1px 1px 7px;
+  -webkit-box-shadow: rgba(0,0,0,1) 1px 1px 7px;
+  -moz-box-shadow: rgba(0,0,0,1) 1px 1px 7px;
+  -o-box-shadow: rgba(0,0,0,1) 1px 1px 7px;
+  background: rgba(85,153,187,.8);
+}
+
+#minaver_b {
+  width: 330px;
+  margin-top: 2em;
+  padding: 10px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  -webkit-box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  -moz-box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  -o-box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  background: rgba(255,102,0,.5);
+}
+
+#minaver_c {
+  width: 310px;
+  margin-top: 2em;
+  float: right;
+  padding: 10px;
+  background: rgba(255,0,102,.8);
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  -webkit-box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  -moz-box-shadow: 0 1px 9px rgba(51,51,51,.8);
+  -o-box-shadow: 0 1px 9px rgba(51,51,51,.8);
+}

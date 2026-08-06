@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testCSS</title>
+    <!-- html 주석 태그임 : html 파일 안에서 사용함 -->
+    <!-- type 속성 반드시 표기할 것 -->
+    <style type="text/css">
+    /* style 안에서 사용하는 주석 기호임, html 주석 태그로 설명 작성 할 수 없음 */
+    /* 전역 스타일시트 : (전역..? : 문서 전체에 적용하는 것)
+        head 태그 안에 style 태그를 추가하고, 이 문서 안에서 사용된 모든 태그들에 대해 선택하고 원하는 css 속성들을 지정할 때 사용하는 방식임
+        이 문서 전체에만 적용되는 스타일이 됨, 다른 html 문서에서는 사용 못 함
+        css 를 적용할 태그 선택이 중요함 => css selector(선택자) 사용함
+        작성방법 : 
+        태그 선택자 {
+            css-property: 값;
+            css-property: 숫자단위;
+        }
+    */
+    hr {  /* 태그명으로 선택 : */ 
+        clear: both;  /* float 속성 적용을 해제함, 값 : left, right, both */
+    }
+
+    li.menuitem {  /* 태그명.클래스명 : 클래스명이 지정된 태그들을 선택함 */
+        display: block; 
+        background-color: orange; 
+        width: 140px; 
+        height: 25px; 
+        float: left;  /* 왼쪽부터 옆으로 배치함 */ /*기존 html은 위 -> 아래 구조이지만, css가 좌->우로 변경 가능*/ 
+        margin-right: 5px;
+        box-shadow: 2px 2px 4px black; /*가로, 세로, 그림자가 칠해지는 범위, 그림자 색깔*/        
+        text-align: center; 
+    } 
+
+    header {
+        margin-bottom: 100px; 
+    }
+
+    section#box {  /* 태그명#아이디명 : 해당 아이디가 지정된 태그를 선택함 */
+        width: 500px;
+        height: 300px;
+        /* border: 3px solid blue; */ /* 태그 테두리선 표시 지정 : 선굵기 선종류 선색; 순으로 지정함 */
+        border-width: 3px; /*선 굵기*/
+        border-style: solid; /*선 종류 */
+        border-color: blue; /*선 색깔*/
+        /* css property 에서 파일을 값으로 지정할 때는 반드시 url("상대 | 절대경로/폴더명/파일명.확장자") 함수를 사용해야 함 */
+        background-image: url("./resources/images/back.jpg");
+        background-repeat: repeat-y; /* 배경그림 반복여부 지정 : repeat(기본), no-repeat(배경과 이미지 크기 동일 시), repeat-x(가로 반복), repeat-y(세로 반복)*/
+        color: magenta;
+        font-weight: bold;
+        white-space: normal;
+        letter-spacing: 5px;
+        text-transform: capitalize; /* 영문자일 때 단어의 첫글자를 대문자로 변환함 */
+    }
+
+    header nav ul li a { /* 태그명 사이의 공백은 태그 안에 있는 태그를 의미함 */
+        /* header 안의 nav 안의 ul 안의 li 안의 a 태그들이 선택됨 */
+        text-decoration: none;  /* 링크 글자의 밑줄 없앰 */
+        text-shadow: 1px 1px 2px white;
+        color: navy;
+        font-weight: bold;
+        display: block;
+        width: 140px;
+        height: 25px;
+    }
+
+    /* 슈도(sudo) 클래스 사용 : 선택한 태그에 동작 이벤트를 부여할 때 사용함
+        예) a 태그에 마우스 커서를 갖다 대었을 때 css 에 변화를 주고자 한다면
+    */
+    header nav ul li a:hover {
+        background: navy;
+        color: white;
+        text-shadow: 1px 1px 2px orange;
+    }
+
+    /* a 태그 영역을 마우스 버튼 눌렀을 때의 슈도 클래스 - :active */
+    header nav ul li a:active {
+        color: red;
+    }
+
+    footer { 
+        text-align: center; 
+        font-size: 9pt;
+    }
+    </style>
+</head>
+<body>   
+   <header>
+        <h1>Test CSS3 Project : testCSS</h1>
+        <nav>
+            <ul>
+                <li class="menuitem"><a href="./views/test/inlineCSS.html">인라인 스타일시트 연습</a></li>
+                <li class="menuitem"><a href="./views/test/selector.html">css selector</a></li>
+                <li class="menuitem"><a href="./views/test/position.html">position</a></li>
+                <li class="menuitem"><a href="views/test/transform.html">transform, transition</a></li>
+                <li class="menuitem"><a href="views/sample/nav_menu.html">네비게이션 메뉴</a></li>
+                <li class="menuitem"><a href="views/sample/accordian.html">아코디언 메뉴</a></li>
+                <li class="menuitem"><a href="views/sample/gallery.html">갤러리</a></li>
+                <li class="menuitem"><a href="views/sample/polaroid.html">폴라로이드 사진</a></li>
+                <li class="menuitem"><a href="views/sample/gra_menu.html">그라데이션 메뉴</a></li>
+                <li class="menuitem"><a href="views/sample/tab_menu.html">탭 메뉴</a></li>
+            </ul>
+        </nav>
+   </header> 
+   <hr>
+   <section>
+    본문내용 영역
+   </section>
+   <hr>
+   <section id="box">
+        <ul>
+            <li>css selector(선택자) 연습</li>
+        </ul>
+   </section>
+   <hr>
+   <footer>
+    copyright@testCSS.or.kr
+   </footer>
+</body>
+</html>
