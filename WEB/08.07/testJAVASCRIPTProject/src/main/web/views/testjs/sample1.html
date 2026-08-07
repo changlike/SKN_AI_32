@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample1</title>
+    <style type="text/css">
+        p { border: 1px solid blue; }
+    </style>
+    <script type="text/javascript">
+        console.log('head 영역 안에 작성된 코드임');
+    </script>
+    <script type="text/javascript" src="../../resources/js/main.js"></script>
+</head>
+<body>
+  <h1>자바스크립트 작성 위치와 작성 방법</h1>  
+  <hr>
+
+  <h2>자바스크립트 코드 작성 위치</h2>
+  <ol>
+    <li>인라인 방식 : 
+        <p id="demo1">
+            시작태그명에 on이벤트종류 라는 속성을 추가하고, 
+            값에 자바스크립트 코드를 직접 작성해서 기능이 작동되도록 하는 방법 <br>
+            on이벤트종류 속성은 자바스크립트가 제공하는 속성이며, 
+            모든 태그에 사용할 수 있음<br>
+            이벤트는 키보드나 마우스 동작을 의미함
+        </p>
+        <button onclick="javascript:window.alert('버튼이 클릭되었습니다.');">Click Me!</button>
+        &nbsp;
+        <button onclick="document.getElementById('demo1').innerHTML='onclick 속성으로 태그 안의 글자를 변경했습니다.';">클릭하세요.</button>
+    </li>
+    <li>internal 방식 : script 태그 안에 함수(function)를 작성해서 함수 영역 안에 자바스크립트 코드를 작성하는 방식 (기본)  
+        <p id="demo2">
+            script 태그의 작성 위치는 head, body, html 밖 어디에든 작성 가능하며,
+            여러 번 사용해도 됨<br>
+            script 태그 안에서 작성된 함수는 태그에 on이벤트종류 속성을 추가해서, 작성된 함수를 실행시킴<br>
+            &lt;태그명 on이벤트="함수이름();"&gt; <br>
+            또는 script 태그 안의 다른 함수가 작성된 함수를 실행할 수도 있음
+        </p>
+        <script type="text/javascript">
+            console.log('body 태그 영역 안에서 작성된 스크립트 코드임.');
+            
+            function myFunction1() {
+                document.getElementById('demo2').innerHTML = '버튼 클릭으로 myFunction1() 함수를 실행시켜, p 태그 안의 값을 바꿈';
+            }
+        </script>
+        <button onclick="myFunction1();">클릭하세요2</button>
+    </li>
+    <li>external 방식 : 별도로 자바스크립트 소스 파일(*.js) 을 작성해 두고, 
+        필요한 웹문서(html, jsp, asp, php 등)를 가져다가 소스 코드를 이용하는 방식   
+        <p id="demo3">
+            별도로 작성된 js 파일을 웹문서에서 가져다 사용할 경우에는 script 태그를 사용함<br>
+            script 태그에 src 속성을 추가해서, js 파일의 경로 포함 파일명.js 를 값으로 지정하면 됨<br>
+            src 속성을 사용한 script 태그 안에는 코드 작성할 수 없음<br>
+            src 속성을 사용한 script 는 주로 head 영역에 작성함
+        </p> 
+        <button onclick="testShow();">클릭하세요3</button>    
+        &nbsp;
+        <button onclick="changeImage();">클릭하면 아래의 그림이 바뀝니다.</button>
+        &nbsp;
+        <button onclick="changeCSS();">스타일바꾸기</button>
+    </li>
+    <img id="image1" src="../../resources/images/button.jpg" width="150" height="150">
+  </ol>
+</body>
+</html>
+<script type="text/javascript">
+    console.log('html 태그 영역 밖에서 작성된 스크립트 코드임.');
+</script>

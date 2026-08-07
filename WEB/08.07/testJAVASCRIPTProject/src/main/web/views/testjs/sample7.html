@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample7</title>
+</head>
+<body>
+    <h1>자바스크립트에서 함수(기능) 다루기</h1>
+    <h2>function 함수명([매개변수, ... ]){ 코드 구문 작성 }</h2>
+    <button onclick="test1();">함수 실행(호출 : call) 확인</button>
+    <p id="p1"></p>
+    <script type="text/javascript">
+        //매개변수가 없는 함수
+        function test1(){
+            document.getElementById('p1').innerHTML = '매개변수 없는 test1() 함수 실행됨...<br>';
+        }
+    </script>
+    <hr>
+
+    <h2>함수를 참조하는 변수 = function([매개변수, .....]){ 구문 작성 };</h2>
+    <h3>익명(이름 없는) 함수 : 주로 이벤트 핸들러 작성시 사용됨, = 왼쪽의 변수가 함수명의 역할을 함</h3>
+    <button onclick="test2();">함수2 실행(호출 : call) 확인</button>
+    <p id="p2"></p>
+    <script type="text/javascript">
+        //익명 함수
+        test2 = function(){
+                    document.getElementById('p2').innerHTML = 'test2가 참조하는 익명 함수 실행됨...<br>';
+                };
+    </script>
+    <hr>
+
+    <h2>스스로 실행되는 함수 : (function(){ 구문 작성 })();</h2>
+    <p id="p3"></p>
+    <script type="text/javascript">
+        //스스로 실행되는 함수
+        (function(){ 
+            document.getElementById('p3').innerHTML = '스르로 실행되는 함수 실행 확인...<br>'; 
+        })();
+    </script>
+    <hr>
+
+    <h2>함수의 전달인자(argument : 함수 쪽으로 전달되는 값)와 
+        매개변수(parameter : 함수 실행하는 쪽에서 전달한 값을 받는 변수)</h2>
+    <button id="btn1">실행 확인</button>
+    <p id="p4"></p>
+    <script type="text/javascript">
+        //매개변수가 있는 함수
+        //test4 함수가 실행될 때 전달오는 값을 받을 변수임
+        //매개변수가 1개이면, 실행시 전달값도 1개임 => 매개변수와 전달값의 갯수는 일치해야 함
+        function test4(value){
+            document.getElementById('p4').innerHTML = 'test4 함수가 전달받은 값 확인 : ' + value;
+        }
+
+        //자바스크립트에서 html 태그에 동작 이벤트 지정을 할 수도 있음
+        //태그객체(태그변수, 태그정보).on이벤트 = 이벤트 핸들러 작성;
+        //이벤트 발생시 실행되는 함수를 이벤트 핸들러라고 함
+        //태그변수.on이벤트 = 실행시킬함수명;  => 뒤에 () 안 붙임
+        //태그변수.on이벤트 = function(){ 구문 작성 };  => 익명 함수
+        document.getElementById('btn1').onclick = function(){
+            //함수 실행 : 함수명(전달값);
+            test4(window.prompt('고객의 이름을 입력하세요.'));
+        };
+    </script>
+    <hr>
+
+    <h2>함수의 리턴 처리</h2>
+    <button id="btn2">실행 확인</button>
+    <p id="p5"></p>
+    <script type="text/javascript">
+        //리턴문 사용 테스트 함수
+        function testReturn(){
+            //모든 함수들은 실행시 함수영역으로 와서 작성된 구문들을 실행하고나서 리턴됨
+            //리턴 : 함수 실행 위치로 되돌아 간다는 의미임
+            //리턴문 작성 규칙 : return 반환값;
+            //      return 문은 함수 영역 맨 마지막에 사용해야 함, 
+            //      딱 한번 실행되도록 작성해야 함
+            //      반환값은 1개만 반환할 수 있음 
+
+            //1 ~ 100 사이의 정수를 하나 발생시켜서 리턴 처리함
+            // (랜덤값 * 범위의 최대값) + 범위의 최소값
+            return Math.floor((Math.random() * 100) + 1);  //소숫점 아래값 버리로 정수 만들기함
+            //랜덤값 : 0.0 <= random < 1.0 (최소 0.00000..... ~ 최대 0.99999999.....)
+        }
+        
+        //이벤트 발생에 의해서 실행되는 익명함수를 콜백함수라고도 함
+        document.getElementById('btn2').onclick = function(){            
+            var value = testReturn();  //함수가 리턴한 값을 변수에 저장하라는 구문임
+            document.getElementById('p5').innerHTML = '리턴된 임의의 난수 확인 : ' + value;
+        };
+    </script>
+    <hr>
+</body>
+</html>

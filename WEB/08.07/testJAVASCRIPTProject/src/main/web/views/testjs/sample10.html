@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample10</title>
+    <style type="text/css">
+        span.description {
+            color: #04419ccb;
+            font-size: 9pt;
+        }
+    </style>
+    <script type="text/javascript">
+        function execute(){
+            //first 와 second 의 결과를 합쳐서 result 에 출력하기
+            //태그 정보 얻기
+            var first = document.getElementById('first');
+            var second = document.getElementById('second');
+
+            /* input 에 기록한 값이 숫자문자열인지 검사 (유효한 값인지 검사 : 유효성 검사)
+                => 정규 표현식을 이용하면 편리함
+                정규표현식 작성 방법
+                1. var 변수명 = new RegExp('정규식');
+                2. var 변수명 = /정규식/;
+            */
+
+            // 텍스트필드에 기록되는 값이 숫자인지 확인
+            var re = /^[0-9]+$/;  //var re = /^[\d]+$/; <= 숫자로만 구성되었는지 확인하는 정규표현식 작성
+            // 확인용(검사용) 메소드 : 정규식변수.test(검사할값) => 검사를 만족하면 true, 검사를 만족하지 않으면 false 가 반환
+            // 검사하기 위해서 주로 if 문 (또는 if ~ else 문) 사용함
+            if(!re.test(first.value)){  // ! (boolean not 연산자) : 논리값을 반대로 바꾸는 연산자임, !false => true
+                //숫자가 아닌 값이 포함된 경우
+                alert('first 숫자만 입력하여야 합니다.');
+                first.value = '';  //input first 의 기록된 값(value) 를 지움 
+                first.focus();  //input first 의 입력커서가 표시되게 함
+                return;  //반환값 없는 return문 사용, 함수 실행 위치로 돌아감
+            }
+
+            if(!re.test(second.value)){  // ! (boolean not 연산자) : 논리값을 반대로 바꾸는 연산자임, !false => true
+                //숫자가 아닌 값이 포함된 경우
+                alert('second 숫자만 입력하여야 합니다.');
+                second.value = '';  //input first 의 기록된 값(value) 를 지움 
+                second.focus();  //input first 의 입력커서가 표시되게 함
+                return;  //반환값 없는 return문 사용, 함수 실행 위치로 돌아감
+            }
+
+            var result = Number(first.value) + Number(second.value);
+            document.getElementById('result').innerHTML = result;
+        }
+
+        //회원 가입 양식의 입력값 검사하는 함수 : 전송버튼 누르면 실행됨
+        function validate(){
+            //태그 정보 가져오기
+            var userId = document.getElementById('userid');
+            var passwd = document.getElementById('userpwd');
+            var passwd2 = document.getElementById('userpwd2');
+            var userName = document.getElementById('username');
+            var email = document.getElementById('email');
+
+            //암호와 암호확인 값이 일치하는지 확인
+            if(passwd.value !== passwd2.value){
+                alert('암호와 암호확인이 일치하지 않습니다. 다시 입력하세요.');
+                passwd2.value = '';
+                passwd.select(); //해당 input 의 기록된 값을 범위지정함
+                return false;  //전송 취소시킴
+            }
+
+            //아이디는 10글자이상 15글자미만으로 영문자들과 숫자1개, 대문자1개로 구성
+            //{10,14} : 10글자이상 15글자미만
+            //[A-Za-z0-9] : 영문자(대문자, 소문자), 숫자로 구성
+            //(?=.*[0-9]) : 숫자 1개 포함
+            //(?=.*[A-Z]) : 대문자 1개 포함           
+
+            //입력된 아이디 값 검사
+            if(!reCheck(/^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{10,14}$/, userId, 
+                '아이디는 10글자이상 15글자미만으로 영문자들과 숫자1개, 대문자1개로 구성되어야 합니다.')){
+               return false;  //전송 취소하고, 아이디 다시 입력받게 처리됨 
+            }
+
+            //암호는 8글자이상 11글자미만으로 영문자는 여러 개와 숫자 1개 포함, 기호는 #&*^ 로만 1개 포함 구성
+            // ^, $ : 문자열 시작과 끝을 고정 (전체 검사)
+            // (?=.*\d) : (?=.*[0-9]) 과 같음, 숫자 1개 포함
+            // (?=.*[\^&*]) : 기호는 #&*^ 로만 1개 포함
+            // {8,10} : 8글자이상 11글자미만
+            // [A-Za-z0-9\^&*] : 허용 문자들
+
+            //입력된 암호 값 검사
+            if(!reCheck(/^(?=.*\d)(?=.*[\^&*])[A-Za-z0-9\^&*]{8,10}$/, passwd, 
+                '암호는 8글자이상 11글자미만으로 영문자는 여러 개와 숫자 1개 포함, 기호는 #&*^ 로만 1개 포함 구성되어야 합니다.')){
+               return false;  //전송 취소하고, 암호 다시 입력받게 처리됨 
+            }
+
+            //회원 이름은 한글 2글자이상으로만 입력 
+            // ^, $ : 문자열 시작과 끝을 고정 (전체 검사)
+            // {2,} : 최소 2글자이상
+            // [가-힝] : 받침 ㅎ 임, 한글 음절만 허용, 유니코드로 범위지정이 더 명확함 /^[\uAC00-\uD7A3]{2,}$/
+            // 대안 : /^[가-힝ㄱ-ㅎㅏ-ㅣ]{2,}$/
+
+            //입력된 이름 값 검사
+            if(!reCheck(/^[\uAC00-\uD7A3]{2,}$/, userName, 
+                '이름은 한글 2글자이상으로 구성되어야 합니다.')){
+               return false;  //전송 취소하고, 암호 다시 입력받게 처리됨 
+            }
+
+            //이메일 정규표현식 : @ 앞글자 (아이디) 구성과 뒤글자 (사이트 도메인) 구성을 정의함
+            // ^[A-Za-z0-9._%+-]+ : A-Za-z0-9._%+- 사용가능, 1글자 이상, @ 앞 글자 구성 정의
+            // @ : 반드시 포함
+            // \.[A-Za-z]{2,}$ : 도메인 부분 (.com, .kr, .org 등)
+
+            //입력된 이메일 값 검사
+            if(!reCheck(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, email, '이메일은 작성형식이 잘못되었습니다.')){
+               return false;  //전송 취소하고, 이메일 다시 입력받게 처리됨 
+            }
+
+            //모든 검사가 문제없이 통과되면 전송보냄 : true 를 함수 실행위치로 보내고 함수 종료함
+            return true;
+        }
+
+        //input 값 정규표현식 유효성 검사해서 true | false 를 반환하는 함수 작성 (코드 중복을 줄이기 위함)
+        function reCheck(re, element, message){
+            if(re.test(element.value)){
+                //정규표현식과 일치한다면
+                return true;
+            }
+
+            //정규표현식과 일치하지 않는다면
+            alert(message);
+            element.value = '';
+            element.focus();
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <h1>입력값에 대한 유효성 검사(Validation Check)와 정규 표현식(Regular Expression) 사용 테스트</h1>
+    <h3>form 태그 안의 input 태그들에 입력된 값들을 서버로 전송하기 전에, 
+        브라우저에서 전송될 값들이 문제가 없는지 자바스크립트로 검사하는 것을 유효성 검사라고 함
+    </h3>
+    <hr>
+
+    <input type="button" value="결과확인" onclick="execute();"> <br>
+    <!-- <input type="text" id="first" onkeyup="alert('키보드에서 손뗌');"> -->
+    <input type="text" id="first"> + <input type="text" id="second"> = <span id="result"></span>
+    <br>
+    <hr>
+
+    <h2>회원 가입 : 유효성 검사 적용</h2>
+    <h4>유효성 검사는 form 의 입력값들이 기록 완료되고, 전송되기 전에 검사함 : 전송(submit) 버튼 누르면(onsubmit) 유효성 검사하고 나서 전송보냄</h4>
+    <h4>이벤트 적용은 2가지 방법이 있음, submit 버튼에 onclick 적용 또는 form 에 onsubmit 적용임</h4>
+    <!-- 전송 버튼 누르면 유효성 검사 함수를 실행시킬 때
+        on이벤트="함수명()" 으로 실행시키면 안됨
+        => 함수가 입력값을 검사해서 문제가 있으면, 경고메세지 출력시키고 다시 입력받게 해야함 : 전송 보내지면 안됨
+        => 문제가 있을 시에는 submit 이벤트를 실행 취소시켜야 함 : return false; 처리함
+        => onsubmit="return 실행할함수명();" 으로 실행시켜야 함 : 함수가 false 를 리턴하면 이벤트 취소, true 리턴하면 전송 실행임
+    -->
+    <form action="" method="post" onsubmit="return validate();">
+        <table width="700" border="0" align="center">
+            <tr>
+                <th colspan="2" style="color: red;">
+                    * 표시된 항목은 필수입력 항목이므로 반드시 입력하세요.
+                </th>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*아이디</th>
+                <td width="550">
+                    <span class="description">아이디는 10글자이상 15글자미만으로 영문자들과 숫자1개, 대문자1개로 구성하세요.</span><br>
+                    <input type="text" id="userid" name="userid" required 
+                    placeholder="아이디는 10글자이상 15글자미만으로 영문자와 숫자로 구성하세요."> &nbsp;
+                    <input type="button" value="중복검사" onclick="dupCheckId(); return false;">
+                    <!-- return false; 는 클릭 이벤트를 취소함, 
+                     form 안의 다른 버튼(submit, reset)으로 클릭 이벤트가 전달되는 것을 막기 위해 반드시 사용함 
+                     -->
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*비밀번호</th>
+                <td width="550">
+                    <span class="description">암호는 8글자이상 11글자미만으로 영문자와 숫자, 기호는 #&*^ 로만 1개 포함 구성하세요.</span><br>
+                    <input type="password" id="userpwd" name="userpwd" required>
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*비밀번호확인</th>
+                <td width="550">
+                    <input type="password" id="userpwd2" required>
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*이름</th>
+                <td width="550"><input type="text" id="username" name="username" required autocomplete="on"></td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*성별</th>
+                <td width="550">
+                    <input type="radio" name="gender" value="남"> 남자 &nbsp;
+                    <input type="radio" name="gender" value="여"> 여자
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">생년월일</th>
+                <td width="550">
+                    <input type="date" id="birth" name="birth">
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*이메일</th>
+                <td width="550">
+                    <input type="email" id="email" name="email" required autocomplete="on">
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">*전화번호</th>
+                <td width="550">
+                    <input type="tel" id="phone" name="phone" required>
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">직업</th>
+                <td width="550">
+                    <select id="job" name="job">
+                        <option selected>직업을 선택하세요.</option>
+                        <option value="dba">데이터베이스 관리자</option>
+                        <option value="dev">개발자</option>
+                        <option value="ai">ai 모델 설계자</option>
+                    </select>
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">취미</th>
+                <td width="550">
+                    <input type="checkbox" name="hobby" value="등산" checked> 등산 &nbsp;
+                    <input type="checkbox" name="hobby" value="독서"> 독서 &nbsp;
+                    <input type="checkbox" name="hobby" value="음악"> 음약 <br>
+                    <input type="checkbox" name="hobby" value="영화"> 영화 &nbsp;
+                    <input type="checkbox" name="hobby" value="게임"> 게임 &nbsp;
+                    <input type="checkbox" name="hobby" value="기타"> 기타 &nbsp;
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc">기타사항</th>
+                <td width="550">
+                    <textarea rows="5" cols="40" name="etc" id="etc"></textarea>
+                </td>
+            </tr>
+            <tr height="30">
+                <th width="150" bgcolor="#f9f9cc" colspan="2">
+                    <input type="reset" value="입력취소"> &nbsp;
+                    <input type="submit" value="가입하기(전송)">
+                </th>                
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

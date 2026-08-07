@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample2</title>
+    <script type="text/javascript" src="../../resources/js/main.js"></script>
+</head>
+<body>
+    <h1>자바스크립트에서 데이터 출력하는 방법</h1>
+    <ol>
+        <li>자바스크립트 내장 객체중 최상위 객체인 window 객체가 제공하는 alert() 메소드를 이용하는 방법</li>
+        <button onclick="testShow();">클릭! alert() 로 출력</button>
+        <hr>
+
+        <li>window 객체의 후손인 document 객체가 제공하는 write() or writeln() 메소드로 body 영역에 출력하는 방법</li>
+        <script type="text/javascript">
+            document.write('자바스크립트에서 사용한 위치에 바로 문장을 출력 처리함');
+        </script>
+        <hr>
+
+        <li>태그 객체의 innerHTML 속성을 사용해서 태그 안의 문장으로 출력하는 방법</li>
+        <button onclick="this.innerHTML='*^^*!';">클릭하면 글자가 바뀝니다.</button>
+        <HR>
+
+        <li>개발자 도구의 console 뷰에 출력하는 방법 : 개발 단계에서 코드 실행 확인이 목적임</li>
+        <button onclick="showMessage();">클릭!</button>
+        <script type="text/javascript">
+            function showMessage(){
+                console.log('개발자 도구 콘솔뷰에 메세지 출력 확인!');
+            }
+        </script>
+        <hr>
+
+        <li>입력양식(input)에 값을 출력하거나, 값을 읽을 경우</li>
+        <input type="number" id="num1" value="0"> + 
+        <input type="number" id="num2" value="0"> = 
+        <input type="number" id="result" value="0">
+        <br>
+        <p id="demo4" style="border: 1px solid black; background: yellow;">
+            더하기 결과
+        </p>
+        <input type="button" value="계산하기" onclick="calculate();">
+    </ol>
+</body>
+</html>
