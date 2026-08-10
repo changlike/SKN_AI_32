@@ -1,0 +1,94 @@
+@charset "UTF-8";   /* HTML 문서의 문자셋과 일치시킴 */
+
+/*
+    selector.css
+    selector.html 에 적용하는 스타일시트 파일
+    CSS3 에 추가된 새로운 선택자 연습용
+    주석 처리 단축키 : Shift + Alt + A (Mac : Shift + Option + A)
+*/
+
+/* 글꼴 파일 등록 */
+@font-face {
+    font-family: TESTF;  /* 사용할 글꼴이름 지정 : 주로 파일명이 글꼴이름임, 임의대로 지정해도 됨 */
+    src: url("../fonts/FZSong_Super.TTF") format("truetype");
+}
+
+/* 태그를 선택하고 나서 스타일시트 적용하는 방식임 
+1. 태그명으로 선택 : 태그명 { css-property: value; }
+*/
+/*body { color: red; }*/
+
+/* 2. 여러 태그에 같은 스타일을 적용하고자 한댜면 
+    태그명, 태그명, ... : , 로 구분해서 나열함
+*/
+/*html, body, h1, ol, ul, hr {
+    margin: 10px;
+    padding: 0px;
+    border: 1px solid black;
+}*/
+
+/* 3. 태그 안에 있는 태그를 선택 : 태그명 뒤에 공백을 사용함 
+    부모태그명 자식태그명
+*/
+/* body h1 {
+    color: blue;
+} */
+
+li {
+    list-style: none;  /* 목록(list)에 자동 표시되는 블릿기호, 숫자번호, 문자번호 등 표시 안 함 */
+    float: left;
+    font-size: 48pt;
+    margin-right: 30px;  /* 태그 경계(border) 바깥 오른쪽 여백 지정 */
+    font-family: TESTF;  /* 위에서 등록한 웹폰트 글꼴을 사용 */
+}
+
+li:nth-child(odd) {  /* 홀수번째 li 태그들을 선택, 짝수는 even 사용함 */
+    color: #900;  
+    /* #RRGGBB 16진수로 0 ~ 255 값을 표현함, 
+    각 색상별로 같은 숫자가 두번씩 반복될 때는 한개만 표기해도 됨 
+    #990000 == #900 과 같음
+    */
+    font-weight: bold;  /* 글자 굵기 지정 */
+}
+
+li:nth-child(4n) {  /* 4의 배수번째 li 태그들을 선택 */
+    color: blue;
+    background-color: hsl(200, 50%, 85%);     
+    /* 색상 지정에 hsl() 함수 사용해도 됨
+        hue : 색상환의 각도, saturation : 채도(%), lightness: 명도(%)
+    */
+}
+
+li:nth-child(2) {
+    color: green;
+    font-family: 궁서체;
+}
+
+/* 다단 구성 */
+/* 클래스명이 지정된 태그를 선택 : 
+    태그명.클랙스명 또는 .클래스명 */
+div.mcol {
+    column-count: 3;
+    column-gap: 20px;
+    column-rule: 1px dotted #f06; /* #ff0066 */
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+    -webkit-column-rule: 1px dotted #f06; 
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    -moz-column-rule: 1px dotted #f06; 
+}
+
+/*  * : 모든 태그를 의미함 */
+* { margin: 0;  padding: 0 }
+
+*:not(img) {  
+    /* 선택할 태그명:not(제외할 태그명) 
+        img 태그들을 제외한 모든 태그들을 선택하라는 의미임
+    */
+    /* box-shadow: 1px 1px 3px blue;  */
+}
+
+img[src$="_s.jpg"] {  /* img 태그의 src 속성의 값이 "_s.jpg" 로 끝나는 img 태그들을 선택하라는 의미임 */
+    opacity: 0.3;  /* 태그에 투명도 지정 : 0.0(투명) ~ 1.0(불투명) */
+}

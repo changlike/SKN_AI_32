@@ -1,0 +1,119 @@
+﻿@charset "UTF-8";
+
+/* 기본 여백 초기화 (브라우저마다 다른 기본 margin/padding 제거) */
+html, body, h1, h2, h3, h4, h5, h6,
+section, header, aside, footer, nav,
+article, figure, fieldset, p, ul, ol, li,
+dl, dt, dd, form { margin: 0; padding: 0; }
+
+body { font: .8em Arial, sans-serif; }
+html { background: #ddd; }
+
+
+/* ===== mission_a : hover 말풍선 버튼 ===== */
+
+/* 링크 밑줄 제거 */
+.mission_a h1 a { text-decoration: none; }
+
+/* 링크에 마우스 오버 시 ::after로 가상의 말풍선 박스 생성 */
+.mission_a h1 a:hover::after {
+  content: 'HTML5! CSS3! 실습입니다.';   /* 표시할 문구 */
+  font: .7em Helvetica, sans-serif;
+  color: #fff;
+
+  /* absolute: 이 박스가 다른 요소를 밀어내지 않도록(자기 영역만 차지) */
+  position: absolute;
+  display: block;
+  margin-left: 90px;
+  top: 0;
+  padding: 10px;
+
+  background: #222;
+  border: 1px solid #555;
+
+  /* 모서리 둥글게 (webkit 접두사 + 표준 속성 함께 작성) */
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  /* 그림자 효과: 바깥 그림자 + 안쪽(inset) 그림자 */
+  -webkit-box-shadow: #ddd 0 0 10px, #ccc 0 0px 5px inset;
+  box-shadow: #ddd 0 0 10px, #ccc 0 0px 5px inset;
+}
+
+
+/* ===== mission_b : hover 시 투명도(opacity) 변화 이미지 ===== */
+
+.mission_b {
+  position: relative;   /* 절대위치로 안 뜨고 원래 자리 기준으로 배치 */
+  top: 10px;
+  left: 10px;
+  border: 1px solid #ccc;
+  width: 70px;
+  height: 70px;
+}
+
+.mission_b img {
+  opacity: .3;   /* 평소엔 반투명 */
+  /* transition: 어떤 속성이(opacity) 얼마 동안(.3s) 어떤 속도로(ease-out) 변할지 지정 */
+  -webkit-transition: opacity .3s ease-out;
+  -moz-transition: opacity .3s ease-out;
+  transition: opacity .3s ease-out;
+}
+
+.mission_b img:hover { opacity: .9; }   /* hover 시 진해짐 */
+
+
+/* ===== mission_c : hover 시 배경색/그림자/너비가 변하는 메뉴 ===== */
+
+.mission_c ul {
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
+.mission_c li { list-style: none; }   /* 리스트 불릿 제거 */
+
+.mission_c li a {
+  color: #000;
+  font-size: 2em;
+  font-weight: normal;
+
+  display: block;   /* a태그를 블록으로 만들어야 마우스 반응 영역이 넓어짐(버튼처럼) */
+  height: 50px;
+  margin: 10px 0;
+  padding: 10px;
+  text-decoration: none;
+
+  text-shadow: rgba(255,255,255,.5) 1px 1px 2px;
+  width: 200px;
+
+  -webkit-border-top-right-radius: 25px;
+  -webkit-border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+
+  -webkit-transition: width .7s ease-out;
+  transition: width .7s ease-out;
+}
+
+/* hover 시 공통 효과: 글자색, 그림자, 너비, 박스 그림자 변화 */
+.mission_c li a:hover {
+  color: #FFFF00;
+  text-shadow: rgba(0,0,0,.7) 1px 1px 1px;
+  width: 230px;
+
+  -webkit-box-shadow: rgba(0,0,0,.3) 3px 3px 5px;
+  box-shadow: rgba(0,0,0,.3) 3px 3px 5px;
+
+  -webkit-transition: width .3s ease-out;
+  transition: width .3s ease-out;
+}
+
+/* li별로 hover 배경색 투명도를 다르게 주어 진하기 단계를 만듦 */
+.mission_c li.ab a:hover { background: rgba(153,0,204,.1); }
+.mission_c li.ac a:hover { background: rgba(153,0,204,.2); }
+.mission_c li.ad a:hover { background: rgba(153,0,204,.3); }
+.mission_c li.ae a:hover { background: rgba(153,0,204,.4); }
+.mission_c li.af a:hover { background: rgba(153,0,204,.5); }
+.mission_c li.ag a:hover { background: rgba(153,0,204,.6); }

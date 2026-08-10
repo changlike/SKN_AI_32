@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample6</title>
+</head>
+<body>
+    <h1>자바스크립트에서 배열 다루기</h1>
+    <p>
+        <script type="text/javascript">
+            var arr1 = new Array(5);  //5개의 변수방을 가진 배열 공간을 메모리에 할당함 => 각 방에 index(순번) 부여됨
+            var arr2 = new Array('red', 'yellow', 'green', 'blue', 'magente', 'navi');
+            //나열된 값의 갯수만큼의 방을 가진 배열 공간을 메모리에 할당하고, 나열된 값들로 초기화 처리함 => 각 방에 index 부여됨
+            var arr3 = new Array();  // 변수방이 없는 빈 배열 공간을 메모리에 할당함 => index 지정 불가능임 (index 없음) => index 사용 못 함
+            //자바스크립트에서는 빈 배열 객체를 메모리에 할당하면, stack(스택) 구조로 데이터를 기록 저장하는 방식을 사용하도록 되어 있음
+
+            document.writeln('arr1이 참조하는 배열공간의 방 갯수 : ' + arr1.length + '<br>');  //5
+            document.writeln('arr2가 참조하는 배열공간의 방 갯수 : ' + arr2.length + '<br>');  //6
+            document.writeln('arr3가 참조하는 배열공간의 방 갯수 : ' + arr3.length + '<br>');  //0
+
+            //배열 공간의 각 순번이 부여된 방들을 다룰 때는, for문을 사용해서 순차적으로 접근해서 처리함
+            //배열을 다루는 알고리즘은 순서대로 처리하는 것이 원칙임 (index 0 부터 1씩 증가시키면서 마지막 방까지 차례대로 처리)
+
+            //arr1이 참조하는 배열 공간에 값 기록 처리
+            for(var i = 0; i < arr1.length; i++){
+                arr1[i] = (i + 1) * 100;
+                arr3.push(arr1[i]);  //arr1이 참조하는 배열 공간에 기록하는 값들을 순서대로 arr3 배열공간에도 기록함
+            }
+
+            //arr1 배열 공간에 기록된 값들 출력 확인
+            for(var i = 0; i < arr1.length; i++){
+                document.writeln('arr1[' + i + '] : ' + arr1[i] + '<br>');
+            }
+
+            //arr2 배열 공간에 기록된 값들 출력 확인
+            for(var i = 0; i < arr2.length; i++){
+                document.writeln('arr2[' + i + '] : ' + arr2[i] + '<br>');
+            }
+
+            //arr3 배열 공간에 기록된 값들 출력 확인  
+            document.writeln('arr3이 가진 값(방) 갯수 : ' + arr3.length + '<br>');     
+            //push 로 기록한 스택의 데이터는 pop 으로 꺼내야 함
+            //스택에 push 는 기록한 데이터가 위로 쌓이면서 하나씩 늘어남     
+            //스택에서 pop 하면 기록된 데이터가 하나씩 줄어들게 됨
+            // document.writeln('arr3 에서 값 추출 : ' + arr3.pop() + '<br>');  //500
+            // document.writeln('arr3이 가진 값(방) 갯수 : ' + arr3.length + '<br>');   //4
+            var count = arr3.length;  // 5가 대입
+            for(var k = 1; k <= count; k++){  //반복 횟수 5번 작동되게 작성하면 됨
+                document.writeln('arr3 에서 값 추출 : ' + arr3.pop() + '<br>');  //500 400 300 200 100
+                document.writeln('arr3이 가진 값(방) 갯수 : ' + arr3.length + '<br>');   //4 3 2 1 0
+            }
+        </script>
+    </p>
+    <hr>
+
+    <h2>자바스크립트에서 배열 초기화</h2>
+    <h3>배열 초기화 : 배열공간 할당과 동시에 초기값들이 기록되는 것</h3>
+    <ul>
+        <li>java</li>
+        <li>mysql</li>
+        <li>frontend</li>
+        <li>backend</li>
+        <li>framework</li>
+    </ul>
+    <p>
+        <script type="text/javascript">
+            var arr1 = new Array('apple', 'banana', 'orange', 'melon');
+            var arr2 = [100, 200, 300, 400, 500];  // [] : 배열 연산자(단항 연산자임) 사용 초기화
+            //태그들을 배열로 받는 경우
+            var liTags = document.getElementsByTagName('li');
+
+            document.writeln('arr1의 값 갯수 : ' + arr1.length + '<br>'); //4
+            document.writeln('arr2의 값 갯수 : ' + arr2.length + '<br>'); //5
+            document.writeln('liTags의 li 태그 갯수 : ' + liTags.length + '<br>'); //5
+
+            // for(var i = 0; i < arr1.length; i++){
+            //     document.writeln('arr1[' + i + '] : ' + arr1[i] + '<br>');
+            // }
+            //for in 문 사용해도 됨 : 인덱스를 0부터 마지막 인덱스까지 순서대로 자동으로 처리함
+            //자바스크립트에서 제공
+            for(var i in arr1){
+                document.writeln('arr1[' + i + '] : ' + arr1[i] + '<br>');
+            }
+            document.writeln('<hr>');
+
+            //for(var i = 0; i < arr2.length; i++){
+            for(var i in arr2){
+                document.writeln('arr2[' + i + '] : ' + arr2[i] + '<br>');
+            }
+            document.writeln('<hr>');
+
+            //for(var i = 0; i < liTags.length; i++){
+            for(var i in liTags){
+                document.writeln('liTags[' + i + '] : ' + liTags[i].innerHTML + '<br>');
+            }
+            document.writeln('<hr>');
+        </script>
+    </p>
+
+    <h2>내장 Array 객체가 제공하는 메소드(멤버함수)와 속성(property, 멤버변수)</h2>
+    <p>
+        <script type="text/javascript">
+            var array = ['java', 'mysql', 'jdbc', 'servlet', 'jsp', 'html5', 'css3', 'javascript', 
+            'ajax', 'react', 'spring boot', 'python', 'ai medeling', 'ai agent', 'fest api'];
+
+            document.writeln('array : ' + array.toString() + '<br>');
+            document.writeln('indexOf : ' + array.indexOf('css3') + '<br>');  //index 조회
+            document.writeln('reverse : ' + array.reverse() + '<br>'); // 저장순서가 반대로 뒤집힘
+            document.writeln('shift : ' + array.shift() + '<br>');  // 0번 인덱스 값을 추출함 (배열에서 삭제됨)
+            document.writeln('array : ' + array.toString() + '<br>');
+            document.writeln('array : ' + array.sort().toString() + '<br>'); //오름차순정렬 결과 출력
+            //객체변수.메소드().메소드()...... => 메소드 체이닝(chainning) 기법
+            //첫번째 메소드가 처리한 결과를 두번째 메소드가 사용하고, 
+            //두번째 메소드가 처리한 결과를 세번째 메소드가 사용하는 구조가 됨
+        </script>
+    </p>
+
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample8</title>
+</head>
+<body>
+    <h1>자바스크립트 객체(json) 다루기</h1>
+    <h2>function 객체명(){ 멤버 구성 }</h2>
+    <button onclick="testObject();">실행확인</button>
+    <p id="p1">
+        함수명은 소문자로 시작, 객체명은 대문자로 시작함<br>
+        <script type="text/javascript">
+            function Book(){ //객체 정의이면서, 생성자(new 생성자함수()) 정의가 됨
+                //멤버변수(field) == 속성(property) : this.멤벼변수명 = 초기값;
+                this.title = null;  //제목
+                this.author = null;  //저자명
+                this.price = 0;   //가격
+
+                //멤버함수(method) : this.멤버함수명 = function([매개변수, 매개변수,...]){ 소스 작성 };
+                this.setBook = function(t, a, p){
+                    //전달받은 값들을 멤버변수에 기록 저장 처리
+                    this.title = t;
+                    this.author = a;
+                    this.price = p;
+                };
+                this.display = function(){
+                    //객체가 가진 값들을 태그 영역에 출력 처리
+                    document.getElementById('p1').innerHTML += 
+                            this.title + ', ' + this.author + ', ' + this.price;
+                };
+            }  //Book object
+
+            function testObject(){
+                //사용자정의 객체 사용 : 객체참조변수 = new 객체명();
+                var obj = new Book();
+                //객체가 가진 메소드 사용 : 객체참조변수.메소드명([전달값, ....]);
+                obj.setBook('자바스크립트 정복', '홍길순', 35000);
+                obj.display();
+            }
+        </script>
+    </p>
+    <hr>
+
+    <h2>버튼을 클릭하면 p2 영역에 div 태그가 추가되게 하는 객체 작성</h2>
+    <button onclick="addDiv();">div 추가</button>
+    <p id="p2"></p>
+    <script type="text/javascript">
+        function MkDiv(){
+            //property
+            this.element = null;
+            //method
+            this.make = function(id, w, h, c){
+                this.element = document.createElement('div');
+                this.element.id = id;
+                this.element.style.width = w + 'px';
+                this.element.style.height = h + 'px';
+                this.element.style.backgroundColor = c;
+
+                return this.element;
+            };
+        }
+
+        function addDiv(){
+            /*
+            var ref = new MkDiv();
+            var element = ref.make('d2', 30, 100, 'red');
+            var pTag = document.getElementById('p2');
+            pTag.appendChild(element);
+            */
+            document.getElementById('p2').appendChild(new MkDiv().make('d2', 30, 100, 'red'));
+        }
+    </script>
+
+</body>
+</html>

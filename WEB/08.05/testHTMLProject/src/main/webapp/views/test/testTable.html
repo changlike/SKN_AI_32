@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testTable</title>
+</head>
+<body>
+    <h1>TABLE 태그 이용한 컨텐츠 배치 연습 페이지</h1>
+    <hr>
+
+    <table border="1" cellspacing="0" width="400" height="150" cellpadding="10" align="center">
+        <tr align="center" height="40" bgcolor="gray"> 
+            <!-- tr 태그 : table row 줄임말, 한 개의 행을 만들 때 사용함 -->
+            <td width="50">1</td> <!-- td 태그 : table data 줄임말, 한 개의 칸(cell)을 만들 때 사용함 -->
+            <td width="100">2</td> <!-- 표가 출력(브라우저에 보여짐)되려면 칸 안에 내용이 기록되어야 함 -->
+            <td width="150">3</td>
+            <td width="100">4</td>
+        </tr>
+        <!-- html 에서는 줄별 칸수를 다르게 지정할 수 없음, 에러임, 
+            반드시 줄별 칸수는 같아야 함 
+        -->
+        <tr height="70" align="right" valign="top">
+            <td bgcolor="red">5</td>
+            <td bgcolor="yellow">6</td>
+            <td bgcolor="green">7</td>
+            <td bgcolor="cyan">8</td>
+        </tr>
+        <tr height="40" align="center" valign="middle">
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>table 태그 : 표의 가로와 세로 형태로 간격을 동일하게 컨텐츠를 배치할 때 사용하는 태그</h3>
+    table 태그의 속성(attribute) : <br>
+    <ol>
+        <li>border="테이블테두리선굵기", 단위는 픽셀(pixel), 기본값은 0 (테두리선 안 보임)</li>
+        <li>width="테이블가로너비", 단위는 픽셀(pixel), 크기 지정없으면 칸(cell)에 기록되는 컨텐츠(글자, 그림) 크기에 맞춰짐</li>
+            각 칸의 너비는 테이블의 width / 칸수로 기본 지정됨
+        <li>height="테이블세로높이", 단위는 픽셀(pixel)</li>
+            각 줄의 높이는 테이블의 height / 줄수로 기본 지정됨
+        <li>cellspacing="셀과 셀사이의 간격", 단위는 픽셀, 0 지정은 간격을 없애는 것임</li>
+            한 칸을 셀(cell) 이라고 함
+        <li>cellpadding="셀 안쪽 여백", 단위는 픽셀</li>
+            주의 : 칸(cell)의 가로와 세로 크기를 고려해서 여백을 지정해야 함
+        <li>align="left | center | right", 브라우저 페이지에서의 표의 수평 위치 지정 (기본은 left 임)</li>
+        <li>추가 속성 : bgcolor="표전체배경색", background="표전체배경이미지.확장자", css 에서 주로 설정하므로 속성으로는 사용 안 함</li>
+    </ol>
+    <hr>
+
+    <h4>표 예제 : 4줄 3칸짜리 표의 첫줄에는 사진배치, 두번째 줄에는 사진 설명 표시</h4>
+    <table border="0" width="340" cellspacing="10" cellpadding="0" align="center">
+        <tr height="50" align="center" valign="middle">
+        <!-- tr 태그 속성 : 
+            height="줄높이"
+            align="줄 안의 칸들안의 내용 수평정렬, left(기본) | center | right"
+            valign="줄 안의 칸들 안의 내용 수직정렬, top | middle(기본) | bottom"
+            bgcolor="한 줄 전체의 배경색", background="한 줄전체 배경그림파일명.확장자"
+        -->
+            <td><img src="../../resources/images/flower1.jpg" width="100" height="50"></td>
+            <td><img src="../../resources/images/flower2.jpg" width="100" height="50"></td>
+            <td><img src="../../resources/images/flower3.jpg" width="100" height="50"></td>
+        </tr>
+        <tr height="20" align="center" valign="middle">
+            <td>flower1</td>
+            <td>flower2</td>
+            <td>flower3</td>
+        </tr>
+        <tr height="50" align="center" valign="middle">
+             <td><img src="../../resources/images/flower1.jpg" width="100" height="50"></td>
+            <td><img src="../../resources/images/flower2.jpg" width="100" height="50"></td>
+            <td><img src="../../resources/images/flower3.jpg" width="100" height="50"></td>
+        </tr>
+        <tr height="20" align="center" valign="middle">
+            <td>flower1</td>
+            <td>flower2</td>
+            <td>flower3</td>
+        </tr>
+    </table>
+    <hr>
+
+    <h4>표 예제2 : 칸(cell)과 관련된 태그와 속성 확인</h4>
+    <table border="1" width="500" height="250" cellspacing="0" cellpadding="10" align="center">
+        <tr>
+            <!-- 한 칸을 정의하는 태그 : th(table haed, 제목행에 사용), td(table data) 
+                th : 칸 안에 기록되는 글자가 자동 가운데정렬, 굵게 진하게 표시됨 
+                td : 칸 안에 기록되는 글자는 왼쪽정렬, 글자 크기는 font size 3임 (8pt)
+
+                th, td 태그에 사용되는 속성(attribute) :
+                width="한 칸의 가로너비"
+                align="칸 안의 수평정렬, left(기본) | center | right"
+                valign="칸 안의 수직정렬, top | middle(기본) | bottom"
+                bgcolor="칸 안 배경색"
+                background="칸 안 배경이미지", 상대경로와 절대경로 둘 다 가능
+
+                셀병합(cell merge) : 셀과 셀을 합치는 속성임
+                rowspan="합칠 줄수", 행 합치기(세로로 합쳐짐), 맨 위 태그에 적용함
+                colspan="합칠 칸수", 칸 합치기(가로로 합쳐짐), 가장 왼쪽에 적용함
+                합쳐진 칸수는 표 전체 칸수에 다 포함되므로 기존의 칸들은 삭제해야 함
+            -->
+            <th colspan="3" bgcolor="#66ccff">1</th>            
+            <td>4</td>
+            <td rowspan="4">5</td>
+        </tr>
+        <tr>
+            <td rowspan="3" bgcolor="#ffcc00">6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            
+        </tr>
+        <tr>           
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            
+        </tr>
+        <tr>           
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+          
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>22</td>
+            <td colspan="3" bgcolor="#ff3300">23</td>           
+        </tr>
+    </table>
+
+</body>
+</html>

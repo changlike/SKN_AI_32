@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nav_menu</title>
+    <!-- 전역 스타일시트 -->
+    <style type="text/css">
+        /* 태그명.클래스명 == .클래스명 
+            태그 안의 태그를 선택하고자 할 때 공백 또는 > 기호를 사용할 수 있음
+            1. 공백 사용 : 부모태그 자식태그
+                예 : header nav ul  => nav 안에 있는 모든 ul 태그들 선택됨
+                nav 아래 ul 과 li 안의 ul 모두 선택됨
+            2. > 기호 사용 : 부모태그 > 직계후손태그
+                예 : header > nav > ul => nav 바로 아래의 ul 태그만 선택됨
+                nav 바로 아래의 ul 만 선택, li 안의 ul 은 선택 안 됨
+        */
+        header > nav > ul.navi {
+            list-style-type: none;  /* == list-style: none; 뷸릿기호 표시 없앰 */
+            height: 40px;  /* 숫자값 뒤에 반드시 단위 표기할 것 */
+            padding: 0;
+            margin: 0;
+        }
+        header > nav > ul.navi li {
+            float: left;
+            position: relative;
+            padding: 0;
+            line-height: 40px;
+            background:#600;  /* == #660000 */
+        }
+        header > nav > ul.navi li a {
+            display: block;
+            font-family:"굴림";
+            font-weight:600;  /* bold, bolder, 100,200,300,...,900 */
+            font-size:14px;
+            padding: 5px 25px; 
+            /* padding: 10px; 상하좌우 동일하게 10px 부여함
+               padding: 10px 15px;  첫번째는 위아래, 두번째는 좌우로 지정됨
+               padding: 2px 3px 5px 5px;  top, right, bottom, left 순으로 지정됨
+            */
+            color: #fff;  /* == #ffffff == rgb(255, 255, 255) */
+            text-decoration: none;  /* 링크된 글자의 밑줄 표시를 없앰 */
+        }
+        header > nav > ul.navi li a:hover {
+            color:#F90;
+        }
+        header > nav > ul.navi li ul {  /* 서브메뉴에 대한 설정 */
+            /* opacity: 0; */  /* 처음부터 투명하게 설정해서 안 보여지게 함 */
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            width: 180px;
+            background: #D8AFAF;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        header > nav > ul.navi li:hover ul {
+            /* opacity: 1; */   /* 메인 메뉴에 마우스 올리면 부메뉴 보여지게 함 */
+            visibility: visible;
+        }
+        header > nav > ul.navi li ul li {
+            float: none;
+            position: static;  /* 기본값임, 특별한 위치 지정없는 기본 배치 상태를 의미함 */
+            height: 0;
+            line-height: 0;
+            background: none;
+        }
+        header > nav > ul.navi li:hover ul li {
+            height: 30px;
+            line-height: 30px;
+            padding:5px 0;
+        }
+        header > nav > ul.navi li ul li a {
+            background: #D8AFAF;
+            font-family:"굴림";  /* 글꼴이름에 쿼테이션(따옴표) 표시 안 해도 됨 */
+            font-weight:600;
+            font-size:14px;
+            color:#900;
+        }
+        header > nav > ul.navi li ul li a:hover {
+            background: #900;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>서브(sub) 메뉴가 펼쳐보이는 네비게이션 메뉴 만들기 샘플 페이지</h2>
+        <hr>
+
+        <nav>
+            <ul class="navi">
+                <li><a href="#"> Home </a></li>
+                <li><a href="#"> 웹 개발</a>
+                    <ul>
+                        <li><a href="#"> 웹 디자인 </a></li>
+                        <li><a href="#"> HTML5 + CSS3</a></li>
+                        <li><a href="#"> JQuery</a></li>
+                        <li><a href="#"> 웹 + 모바일</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"> 게시판 </a>
+                    <ul>
+                        <li><a href="#"> Q & A </a></li>
+                        <li><a href="#"> 방명록</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"> 프로필</a></li>
+            </ul>
+        </nav>
+    </header>
+
+</body>
+</html>
