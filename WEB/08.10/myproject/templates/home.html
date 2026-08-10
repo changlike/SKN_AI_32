@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+<h1>Django 회원 관리 + 게시판 서비스</h1>
+<p>MySQL 연결, Django ORM, 세션 인증, MVT 구조 실습 프로젝트</p>
+(% if not user.is_authenticated %)
+    <a href="{% url 'members:signup' %}">회원가입</a>
+{% endif %}
+{% if user.is_authenticated %}
+    <a href="{% url 'members:signup"}
+    {{user.dis}}
+
+{% endif %}
+</body>
+</html>
+
+
+
+
+
+
+
