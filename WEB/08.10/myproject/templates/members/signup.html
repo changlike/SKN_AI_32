@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+</head>
+<body>
+    <h1>회원 가입</h1>
+    <!-- 파일 업로드가 있으므로, enctype 속성과 post 전송이어야 함 -->
+    <form method="post" enctype="multipart/form-data">
+        <!-- Django CSRF 공격 방지 토큰임 -->
+        {% csrf_token %}
+
+        <!-- Django Form 을 자동 출력함 -->
+        {{ form.as_p }}
+
+        <button type="submit">회원 가입</button>
+    </form>
+
+    <a href="{%  url 'members:login' %}">로그인</a>
+</body>
+</html>
