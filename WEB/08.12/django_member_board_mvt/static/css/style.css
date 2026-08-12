@@ -1,0 +1,82 @@
+/* 모든 요소의 width 계산에 padding과 border를 포함하여 레이아웃 계산을 단순화합니다. */
+* { box-sizing: border-box; }
+/* 페이지 전체의 기본 여백, 글꼴, 배경색, 글자색을 지정합니다. */
+body { margin: 0; font-family: Arial, "Noto Sans KR", sans-serif; background: #f4f6f9; color: #1f2937; }
+/* 링크의 기본 밑줄을 제거하고 부모 글자색을 상속합니다. */
+a { color: inherit; text-decoration: none; }
+/* 대부분의 콘텐츠가 너무 넓어지지 않도록 중앙 고정 폭 컨테이너를 만듭니다. */
+.container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+/* 상단 메뉴에 어두운 배경과 흰색 글자를 적용합니다. */
+.site-header { background: #111827; color: white; }
+/* 내비게이션 항목을 가로로 정렬하고 양쪽 끝에 배치합니다. */
+.nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+/* 서비스 이름을 조금 크게 강조합니다. */
+.brand { font-size: 1.2rem; font-weight: 700; }
+/* 우측 메뉴를 가로로 나열하고 간격을 둡니다. */
+.nav-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+/* form 때문에 메뉴 줄 정렬이 깨지지 않도록 inline-flex를 사용합니다. */
+.inline-form { display: inline-flex; margin: 0; }
+/* 일반 링크처럼 보이는 로그아웃 버튼을 만듭니다. */
+.link-button { border: 0; background: transparent; color: white; cursor: pointer; font: inherit; padding: 0; }
+/* 본문 위아래 공간을 확보합니다. */
+.main-content { min-height: calc(100vh - 140px); padding: 32px 0; }
+/* 흰색 패널 형태의 공통 카드 스타일입니다. */
+.card { background: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 4px 18px rgba(0,0,0,.06); }
+/* 로그인/회원가입처럼 좁은 폼은 최대 폭을 제한합니다. */
+.narrow { max-width: 640px; margin-left: auto; margin-right: auto; }
+/* 제목과 우측 버튼을 한 줄에 정렬합니다. */
+.page-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+/* 버튼 공통 스타일을 지정합니다. */
+.btn { display: inline-block; border: 0; border-radius: 8px; padding: 10px 16px; background: #2563eb; color: white; cursor: pointer; font-weight: 700; }
+/* 보조 동작은 회색 버튼으로 구분합니다. */
+.btn.secondary { background: #6b7280; }
+/* 삭제처럼 위험한 동작은 빨간색으로 구분합니다. */
+.btn.danger { background: #dc2626; }
+/* 표 안의 작은 버튼 크기를 줄입니다. */
+.btn.small { padding: 6px 10px; font-size: .85rem; }
+/* 여러 버튼을 가로로 배치할 때 간격을 둡니다. */
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+/* 폼의 각 라벨/입력 묶음 사이에 간격을 둡니다. */
+.form-group { margin-bottom: 16px; }
+/* 폼 라벨을 입력 위 한 줄에 배치하고 강조합니다. */
+.form-group label { display: block; margin-bottom: 6px; font-weight: 700; }
+/* text/select/textarea/file 입력의 공통 모양을 지정합니다. */
+.form-control { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; background: white; }
+/* 입력 오류 메시지를 빨간색으로 표시합니다. */
+.field-error { color: #b91c1c; margin-top: 5px; font-size: .9rem; }
+/* 검색 입력과 버튼을 한 줄에 배치합니다. */
+.search-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin: 18px 0; }
+/* 작은 화면에서도 테이블이 잘리지 않고 가로 스크롤되도록 합니다. */
+.table-wrap { overflow-x: auto; }
+/* 테이블을 컨테이너 너비 전체에 사용하고 셀 경계를 합칩니다. */
+table { width: 100%; border-collapse: collapse; }
+/* 표 제목과 데이터 셀의 기본 여백과 하단 경계를 설정합니다. */
+th, td { padding: 12px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+/* 표 머리글의 배경을 구분합니다. */
+th { background: #f9fafb; }
+/* 상세 내용 영역의 줄바꿈과 읽기 편한 여백을 설정합니다. */
+.content-box { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: 8px; line-height: 1.7; }
+/* 작성자/시간/조회수 같은 보조 정보를 흐린 색으로 표시합니다. */
+.meta { color: #6b7280; font-size: .92rem; }
+/* 페이지 이동 링크를 가운데 배치합니다. */
+.pagination { display: flex; justify-content: center; gap: 16px; margin-top: 20px; }
+/* 메시지 출력 영역의 위쪽 공간을 확보합니다. */
+.message-area { padding-top: 16px; }
+/* 성공/오류 공통 메시지 박스 스타일을 지정합니다. */
+.message { padding: 12px 16px; border-radius: 8px; background: #dbeafe; margin-bottom: 8px; }
+/* 오류 메시지는 붉은 배경으로 구분합니다. */
+.message.error { background: #fee2e2; }
+/* 회원정보의 항목명과 값을 2열로 정렬합니다. */
+.detail-grid { display: grid; grid-template-columns: 140px 1fr; gap: 10px 16px; }
+/* 회원정보 항목명을 굵게 표시합니다. */
+.detail-grid dt { font-weight: 700; }
+/* 프로필 이미지가 지나치게 커지지 않게 크기와 자르기 방식을 지정합니다. */
+.profile-photo { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; margin-bottom: 20px; }
+/* 최근 게시글 목록을 세로 목록으로 배치합니다. */
+.list-table { display: grid; gap: 4px; }
+/* 최근 게시글 한 줄에서 제목과 메타 정보를 양쪽에 배치합니다. */
+.list-row { display: flex; justify-content: space-between; gap: 16px; padding: 12px; border-bottom: 1px solid #e5e7eb; }
+/* 하단 영역을 어두운 배경으로 표시합니다. */
+.site-footer { background: #111827; color: #d1d5db; padding: 20px 0; }
+/* 좁은 모바일 화면에서는 주요 가로 배치를 세로로 바꿉니다. */
+@media (max-width: 700px) { .nav, .page-head, .list-row { align-items: flex-start; flex-direction: column; } .search-form { grid-template-columns: 1fr; } .detail-grid { grid-template-columns: 1fr; } }

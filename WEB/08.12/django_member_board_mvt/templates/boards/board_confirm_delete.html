@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}게시글 삭제{% endblock %}
+{% block content %}
+<section class="card narrow">
+    <h1>게시글 삭제</h1>
+    <p>「{{ board.title }}」 게시글을 삭제하시겠습니까?</p>
+    <!-- 실제 DELETE 역할의 상태 변경은 POST 요청에서만 수행합니다. -->
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn danger" type="submit">삭제 확정</button>
+        <a class="btn secondary" href="{% url 'boards:detail' board.pk %}">취소</a>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}OpenAI RAG 검색{% endblock %}
+{% block content %}
+<section class="card">
+    <h1>OpenAI LLM + ChromaDB RAG 검색</h1>
+    <p class="help-text">제공된 <code>docs</code> PDF와 Django 게시글을 벡터DB에서 의미 검색한 뒤, 검색 근거만 사용하여 답변합니다.</p>
+    <form method="post" class="stack-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="primary-button">RAG 검색 및 답변 생성</button>
+    </form>
+</section>
+
+{% if answer %}
+<section class="card rag-answer">
+    <h2>AI 답변</h2>
+    <div class="answer-box">{{ answer|linebreaksbr }}</div>
+</section>
+{% endif %}
+
+{% if results %}
+<section class="card">
+    <h2>검색 근거 {{ results|length }}건</h2>
+    <div class="rag-results">
+        {% for result in results %}
+        <article class="rag-result">
+            <div class="rag-result-head">
+                {% if result.metadata.source_type == "document" %}
+                    <strong>문서 · {{ result.metadata.title }}</strong>
+                    <span>{{ result.metadata.page }}쪽</span>
+                {% else %}
+                    <strong>게시글 #{{ result.metadata.board_id }} · {{ result.metadata.title }}</strong>
+                    <span>{{ result.metadata.author }}</span>
+                {% endif %}
+                {% if result.similarity != None %}
+                    <span>유사도 {{ result.similarity|floatformat:3 }}</span>
+                {% endif %}
+            </div>
+            <p>{{ result.text|truncatechars:500 }}</p>
+            {% if result.metadata.url %}
+                <a href="{{ result.metadata.url }}" target="_blank" rel="noopener">근거 원문 보기</a>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

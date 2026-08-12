@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}회원 탈퇴{% endblock %}
+{% block content %}
+<section class="card narrow">
+    <h1>회원 탈퇴</h1>
+    <p>회원 계정과 회원이 작성한 게시글이 함께 삭제됩니다. 계속하시겠습니까?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn danger" type="submit">탈퇴 확정</button>
+        <a class="btn secondary" href="{% url 'members:profile' %}">취소</a>
+    </form>
+</section>
+{% endblock %}

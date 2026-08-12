@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}로그인{% endblock %}
+{% block content %}
+<section class="card narrow">
+    <h1>로그인</h1>
+    <!-- 인증 정보는 POST 방식으로 전송합니다. -->
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+        {% endfor %}
+        {% for error in form.non_field_errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+        <button class="btn" type="submit">로그인</button>
+    </form>
+</section>
+{% endblock %}
