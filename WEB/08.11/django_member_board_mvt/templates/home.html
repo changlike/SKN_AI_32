@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}메인 | Django Member Board{% endblock %}
+{% block content %}
+<!-- 첫 화면의 서비스 소개 영역입니다. -->
+<section class="hero card">
+    <h1>Django 회원 관리 + 게시판 서비스</h1>
+    <p>MySQL, Django ORM, 세션 인증, 회원 권한, 게시글 CRUD를 한 프로젝트에서 실습합니다.</p>
+    <div class="actions">
+        <a class="btn" href="{% url 'boards:list' %}">게시판 보기</a>
+        {% if not user.is_authenticated %}
+            <a class="btn secondary" href="{% url 'members:signup' %}">회원가입</a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ORM으로 조회한 최근 게시글을 간단히 출력합니다. -->
+<section class="card">
+    <h2>최근 게시글</h2>
+    <div class="list-table">
+        {% for post in recent_posts %}
+            <a class="list-row" href="{% url 'boards:detail' post.pk %}">
+                <span>{{ post.title }}</span>
+                <span>{{ post.author.display_name }} · {{ post.created_at|date:'Y-m-d H:i' }}</span>
+            </a>
+        {% empty %}
+            <p>등록된 게시글이 없습니다.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
