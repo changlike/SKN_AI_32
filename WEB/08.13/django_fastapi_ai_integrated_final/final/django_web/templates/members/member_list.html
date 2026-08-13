@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}회원 관리{% endblock %}
+{% block content %}
+<section class="card">
+    <h1>관리자 회원 관리</h1>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>아이디</th><th>이름</th><th>이메일</th><th>가입일</th><th>로그인</th><th>처리</th></tr></thead>
+            <tbody>
+            {% for member in members %}
+                <tr>
+                    <td>{{ member.username }}</td><td>{{ member.display_name }}</td><td>{{ member.email }}</td>
+                    <td>{{ member.date_joined|date:'Y-m-d' }}</td>
+                    <td>{% if member.is_active %}허용{% else %}제한{% endif %}</td>
+                    <td>
+                        <!-- 회원의 로그인 허용 상태 변경도 POST 방식으로 처리합니다. -->
+                        <form method="post" action="{% url 'members:toggle_active' member.pk %}">
+                            {% csrf_token %}
+                            <button class="btn small" type="submit">{% if member.is_active %}로그인 제한{% else %}로그인 허용{% endif %}</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}<tr><td colspan="6">회원이 없습니다.</td></tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

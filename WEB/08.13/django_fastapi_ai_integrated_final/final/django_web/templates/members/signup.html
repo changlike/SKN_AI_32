@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}회원가입{% endblock %}
+{% block content %}
+<!-- 파일 업로드가 있으므로 multipart/form-data 인코딩을 사용합니다. -->
+<section class="card narrow">
+    <h1>회원가입</h1>
+    <form method="post" enctype="multipart/form-data">
+        <!-- Django CSRF 미들웨어 검증을 통과하기 위한 토큰입니다. -->
+        {% csrf_token %}
+        <!-- 폼의 각 필드와 오류 메시지를 출력합니다. -->
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<small>{{ field.help_text|safe }}</small>{% endif %}
+                {% for error in field.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+            </div>
+        {% endfor %}
+        {% for error in form.non_field_errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+        <button class="btn" type="submit">가입하기</button>
+    </form>
+</section>
+{% endblock %}

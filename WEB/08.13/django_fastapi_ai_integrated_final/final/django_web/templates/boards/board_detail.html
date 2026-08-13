@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ board.title }}{% endblock %}
+{% block content %}
+<article class="card">
+    <div class="page-head"><h1>{{ board.title }}</h1><a class="btn secondary" href="{% url 'boards:list' %}">목록</a></div>
+    <div class="meta">작성자 {{ board.author.display_name }} ({{ board.author.username }}) · {{ board.created_at|date:'Y-m-d H:i' }} · 조회 {{ board.read_count }}</div>
+    <div class="content-box">{{ board.content|linebreaks }}</div>
+    {% if board.attachment %}<p>첨부파일: <a href="{{ board.attachment.url }}">{{ board.attachment.name }}</a></p>{% endif %}
+    <div class="actions">
+        <!-- 수정은 오직 작성자 본인에게만 노출합니다. 서버 View에서도 동일하게 다시 검사합니다. -->
+        {% if user.is_authenticated and user.pk == board.author_id %}<a class="btn" href="{% url 'boards:update' board.pk %}">수정</a>{% endif %}
+        <!-- 삭제는 작성자 본인 또는 관리자에게 노출하며, 서버에서도 can_delete()로 재검사합니다. -->
+        {% if user.is_authenticated %}
+            {% if user.pk == board.author_id or user.is_staff or user.is_superuser %}<a class="btn danger" href="{% url 'boards:delete' board.pk %}">삭제</a>{% endif %}
+        {% endif %}
+    </div>
+</article>
+{% endblock %}

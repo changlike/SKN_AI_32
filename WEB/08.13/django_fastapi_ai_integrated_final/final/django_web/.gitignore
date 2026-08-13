@@ -1,0 +1,17 @@
+# Python 캐시 파일을 버전 관리에서 제외합니다.
+__pycache__/
+*.py[cod]
+# PyCharm 가상환경을 제외합니다.
+.venv/
+venv/
+# 실제 비밀키와 DB 비밀번호가 있는 환경설정 파일을 제외합니다.
+.env
+# 사용자가 올린 파일을 저장하는 media 폴더 내용을 제외합니다.
+media/*
+# 단, 빈 media 폴더는 유지할 수 있도록 .gitkeep은 추적합니다.
+!media/.gitkeep
+# PyCharm 개인 설정 파일을 제외합니다.
+.idea/
+
+# 실행 중 생성되는 ChromaDB 벡터 인덱스는 API Key로 재생성할 수 있으므로 Git에서 제외합니다.
+vector_db/chroma/

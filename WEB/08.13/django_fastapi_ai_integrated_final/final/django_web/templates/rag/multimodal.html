@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}FastAPI 멀티모달 AI{% endblock %}
+{% block content %}
+<!-- Django 프론트에서 FastAPI AI 기능을 사용하는 통합 화면입니다. -->
+<section class="card">
+    <!-- 페이지의 목적을 설명합니다. -->
+    <h1>Django + FastAPI 멀티모달 AI 서비스</h1>
+    <!-- 브라우저는 Django 동일 출처만 호출하고 Django가 FastAPI로 전달하는 구조를 안내합니다. -->
+    <p class="help-text">로그인/세션/화면은 Django가 담당하고, 이미지 캡셔닝·이미지 생성·STT·TTS는 FastAPI AI 파이프라인이 처리합니다.</p>
+    <!-- FastAPI와 공유 MySQL 연결 상태를 확인할 버튼입니다. -->
+    <button type="button" id="healthButton" class="secondary-button">FastAPI 연결 상태 확인</button>
+    <!-- 비동기 처리 상태를 표시합니다. -->
+    <p id="aiStatus" class="help-text">AI 서버 상태를 확인할 수 있습니다.</p>
+</section>
+
+<!-- 이미지 캡셔닝 기능 카드입니다. -->
+<section class="card">
+    <h2>1. 이미지 캡셔닝</h2>
+    <!-- 파일 업로드는 JavaScript가 Django 프록시 API로 전송합니다. -->
+    <form id="captionForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="captionFile">이미지 선택</label>
+        <input id="captionFile" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/bmp" required>
+        <button type="submit" class="primary-button">이미지 설명 생성</button>
+    </form>
+    <!-- 선택한 이미지를 브라우저에서 미리 보여줍니다. -->
+    <img id="captionPreview" class="ai-preview hidden" alt="선택 이미지 미리보기">
+    <!-- FastAPI BLIP/NLLB 결과를 표시합니다. -->
+    <div id="captionResult" class="ai-result hidden">
+        <p><strong>영어 캡션:</strong> <span id="captionEnglish"></span></p>
+        <p><strong>한국어 캡션:</strong> <span id="captionKorean"></span></p>
+        <button type="button" id="captionTtsButton" class="secondary-button">한국어 캡션 TTS</button>
+        <audio id="captionAudio" class="hidden" controls></audio>
+    </div>
+</section>
+
+<!-- Stable Diffusion 이미지 생성 기능 카드입니다. -->
+<section class="card">
+    <h2>2. 프롬프트 이미지 생성</h2>
+    <!-- 텍스트 또는 STT 결과를 Stable Diffusion 프롬프트로 전송합니다. -->
+    <form id="generateForm">
+        {% csrf_token %}
+        <label for="prompt">이미지 생성 프롬프트</label>
+        <textarea id="prompt" name="prompt" rows="4" placeholder="예: 한강의 야경을 바라보는 미래 도시의 로봇, 사실적인 사진 스타일" required></textarea>
+        <label for="negativePrompt">Negative prompt</label>
+        <input id="negativePrompt" name="negative_prompt" value="blurry, low quality, distorted, watermark, text">
+        <div class="ai-grid">
+            <div><label for="steps">Steps</label><input id="steps" name="steps" type="number" min="5" max="60" value="40"></div>
+            <div><label for="guidanceScale">Guidance</label><input id="guidanceScale" name="guidance_scale" type="number" min="1" max="20" step="0.5" value="8"></div>
+            <div><label for="seed">Seed(선택)</label><input id="seed" name="seed" type="number" placeholder="비우면 랜덤"></div>
+        </div>
+        <button type="submit" class="primary-button">이미지 생성</button>
+        <!-- 마이크 녹음 결과를 프롬프트 입력창에 자동 넣습니다. -->
+        <button type="button" id="recordButton" class="secondary-button">🎤 음성 프롬프트 녹음</button>
+    </form>
+    <!-- STT 녹음 상태를 표시합니다. -->
+    <p id="recordStatus" class="help-text">마이크 버튼을 누르면 녹음을 시작합니다.</p>
+    <!-- 생성된 이미지를 표시합니다. -->
+    <div id="generateResult" class="ai-result hidden">
+        <p><strong>사용 프롬프트:</strong> <span id="usedPrompt"></span></p>
+        <p><strong>Seed:</strong> <span id="usedSeed"></span></p>
+        <img id="generatedImage" class="ai-generated" alt="FastAPI가 생성한 이미지">
+    </div>
+</section>
+
+<!-- 별도의 텍스트 TTS 테스트 기능입니다. -->
+<section class="card">
+    <h2>3. 텍스트 음성 변환(TTS)</h2>
+    <!-- 사용자가 원하는 문장을 서버 TTS로 변환합니다. -->
+    <form id="ttsForm">
+        {% csrf_token %}
+        <label for="ttsText">음성으로 읽을 문장</label>
+        <textarea id="ttsText" name="text" rows="3" placeholder="안녕하세요. Django와 FastAPI가 연동된 AI 서비스입니다." required></textarea>
+        <button type="submit" class="primary-button">TTS 생성 및 재생</button>
+    </form>
+    <!-- FastAPI가 생성한 WAV 파일을 재생합니다. -->
+    <audio id="ttsAudio" class="hidden" controls></audio>
+</section>
+
+<!-- 이 페이지에서만 사용할 JavaScript를 연결합니다. -->
+<script src="{% static 'js/multimodal.js' %}"></script>
+{% endblock %}
