@@ -1,0 +1,16 @@
+/* Bootstrap이 전체 레이아웃과 폼 UI를 담당하고, 이 파일은 프로젝트 고유 화면만 보완합니다. */
+body { font-family: Arial, "Noto Sans KR", sans-serif; }
+
+/* Django 기본 help_text 안의 ul이 지나치게 들여쓰기 되지 않도록 보완합니다. */
+.form-text ul { margin: .35rem 0 0; padding-left: 1.2rem; }
+
+/* 프로필/게시글 등 긴 문자열이 카드 폭을 넘지 않도록 합니다. */
+.card { overflow-wrap: anywhere; }
+
+/* RAG 결과와 멀티모달 AI 출력 전용 스타일입니다. */
+.answer-box { white-space: normal; line-height: 1.75; }
+.ai-preview { max-width: 420px; max-height: 320px; margin-top: 1rem; border-radius: .5rem; object-fit: contain; }
+.ai-generated { width: min(100%, 768px); margin-top: .75rem; }
+
+/* 기존 JavaScript가 hidden 클래스를 토글하는 경우도 계속 정상 동작하도록 호환 클래스를 유지합니다. */
+.hidden { display: none !important; }

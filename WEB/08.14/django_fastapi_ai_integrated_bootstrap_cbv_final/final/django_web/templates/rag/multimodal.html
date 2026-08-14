@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}FastAPI 멀티모달 AI{% endblock %}
+{% block content %}
+<section class="card border-0 shadow-sm mb-4"><div class="card-body p-4">
+    <h1 class="h3">Django + FastAPI 멀티모달 AI 서비스</h1>
+    <p class="text-secondary">로그인/세션/화면은 Django가 담당하고, 이미지 캡셔닝·이미지 생성·STT·TTS는 FastAPI AI 파이프라인이 처리합니다.</p>
+    <button type="button" id="healthButton" class="btn btn-outline-secondary">FastAPI 연결 상태 확인</button>
+    <p id="aiStatus" class="text-secondary small mt-3 mb-0">AI 서버 상태를 확인할 수 있습니다.</p>
+</div></section>
+
+<section class="card border-0 shadow-sm mb-4"><div class="card-body p-4">
+    <h2 class="h4 mb-3">1. 이미지 캡셔닝</h2>
+    <form id="captionForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3"><label class="form-label fw-semibold" for="captionFile">이미지 선택</label><input class="form-control" id="captionFile" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/bmp" required></div>
+        <button type="submit" class="btn btn-primary">이미지 설명 생성</button>
+    </form>
+    <img id="captionPreview" class="ai-preview hidden" alt="선택 이미지 미리보기">
+    <div id="captionResult" class="ai-result hidden mt-3 border rounded p-3 bg-body-tertiary">
+        <p><strong>영어 캡션:</strong> <span id="captionEnglish"></span></p>
+        <p><strong>한국어 캡션:</strong> <span id="captionKorean"></span></p>
+        <button type="button" id="captionTtsButton" class="btn btn-outline-secondary btn-sm">한국어 캡션 TTS</button>
+        <audio id="captionAudio" class="hidden mt-3 w-100" controls></audio>
+    </div>
+</div></section>
+
+<section class="card border-0 shadow-sm mb-4"><div class="card-body p-4">
+    <h2 class="h4 mb-3">2. 프롬프트 이미지 생성</h2>
+    <form id="generateForm">
+        {% csrf_token %}
+        <div class="mb-3"><label class="form-label fw-semibold" for="prompt">이미지 생성 프롬프트</label><textarea class="form-control" id="prompt" name="prompt" rows="4" placeholder="예: 한강의 야경을 바라보는 미래 도시의 로봇, 사실적인 사진 스타일" required></textarea></div>
+        <div class="mb-3"><label class="form-label fw-semibold" for="negativePrompt">Negative prompt</label><input class="form-control" id="negativePrompt" name="negative_prompt" value="blurry, low quality, distorted, watermark, text"></div>
+        <div class="row g-3 mb-3">
+            <div class="col-md-4"><label class="form-label" for="steps">Steps</label><input class="form-control" id="steps" name="steps" type="number" min="5" max="60" value="40"></div>
+            <div class="col-md-4"><label class="form-label" for="guidanceScale">Guidance</label><input class="form-control" id="guidanceScale" name="guidance_scale" type="number" min="1" max="20" step="0.5" value="8"></div>
+            <div class="col-md-4"><label class="form-label" for="seed">Seed(선택)</label><input class="form-control" id="seed" name="seed" type="number" placeholder="비우면 랜덤"></div>
+        </div>
+        <div class="d-flex gap-2 flex-wrap"><button type="submit" class="btn btn-primary">이미지 생성</button><button type="button" id="recordButton" class="btn btn-outline-secondary">🎤 음성 프롬프트 녹음</button></div>
+    </form>
+    <p id="recordStatus" class="text-secondary small mt-3">마이크 버튼을 누르면 녹음을 시작합니다.</p>
+    <div id="generateResult" class="ai-result hidden mt-3 border rounded p-3 bg-body-tertiary">
+        <p><strong>사용 프롬프트:</strong> <span id="usedPrompt"></span></p><p><strong>Seed:</strong> <span id="usedSeed"></span></p><img id="generatedImage" class="ai-generated img-fluid rounded" alt="FastAPI가 생성한 이미지">
+    </div>
+</div></section>
+
+<section class="card border-0 shadow-sm"><div class="card-body p-4">
+    <h2 class="h4 mb-3">3. 텍스트 음성 변환(TTS)</h2>
+    <form id="ttsForm">{% csrf_token %}<div class="mb-3"><label class="form-label fw-semibold" for="ttsText">음성으로 읽을 문장</label><textarea class="form-control" id="ttsText" name="text" rows="3" placeholder="안녕하세요. Django와 FastAPI가 연동된 AI 서비스입니다." required></textarea></div><button type="submit" class="btn btn-primary">TTS 생성 및 재생</button></form>
+    <audio id="ttsAudio" class="hidden mt-3 w-100" controls></audio>
+</div></section>
+<script src="{% static 'js/multimodal.js' %}"></script>
+{% endblock %}

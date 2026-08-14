@@ -1,0 +1,10 @@
+# Django 5.2 LTS 계열을 사용하여 Python 3.11 환경에서 웹 프론트/백엔드를 실행합니다.
+Django>=5.2,<5.3
+# Django ORM이 MySQL과 통신할 때 사용하는 드라이버입니다.
+mysqlclient>=2.2.8,<3.0
+# 회원 프로필 ImageField 처리에 사용합니다.
+Pillow>=11.0,<13.0
+# .env 파일에서 DB와 FastAPI 주소를 읽습니다.
+python-dotenv>=1.0,<2.0
+# Django 서버가 FastAPI AI 파이프라인을 HTTP로 호출할 때 사용합니다.
+requests>=2.32,<3.0
