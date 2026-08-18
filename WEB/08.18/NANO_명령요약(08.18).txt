@@ -1,0 +1,41 @@
+[Linux]
+sudo -i
+cp /etc/services /root/nano_practice.txt
+ls -l /root/nano_practice.txt
+nano /root/nano_practice.txt
+
+
+[nano 이동]
+Ctrl + A       줄 시작
+Ctrl + E       줄 끝
+Ctrl + Y       한 화면 위
+Ctrl + V       한 화면 아래
+Alt + \        파일 처음
+Alt + /        파일 끝
+
+
+[nano 편집]
+Backspace      앞 문자 삭제
+Delete         뒤 문자 삭제
+Enter          줄 바꿈
+Ctrl + K       잘라내기
+Alt + 6        복사
+Ctrl + U       붙여넣기
+Ctrl + Shift + 6   영역 선택
+
+
+[검색]
+Ctrl + W       검색
+Alt + W        다음 검색 결과
+
+
+[검색 및 치환]
+Ctrl + \       검색/교체
+
+
+[저장/종료]
+Ctrl + O       저장
+Enter          파일명 확인
+Ctrl + X       종료
+Y              Yes
+N              No

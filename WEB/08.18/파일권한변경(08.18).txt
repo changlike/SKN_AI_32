@@ -1,0 +1,83 @@
+[파일 권한 이해 및 권한 변경]
+
+drwxr-xr-x 
+-rw-r--r-- 
+
+* 첫번째 d : directory 의미
+* 첫번째 - : file 의미
+* 두번째부터 3자리씩 묶어서, 소유자권한/그룹권한/기타사용자권한을 의미함
+
+drwxr-xr-x 분석:
+d : directory
+rwx : 소유자는 read/write/excute  권한있음
+r-x : 그룹은 read/excute 권한있음
+r-x : 기타사용자는 read/exceute 권한있음
+
+-rw-r--r-- 분석:
+- : file
+rw- : 소유자는 read/write 권한있음
+r-- : 그룹은 read 권한있음
+r-- : 기타사용자는 read 권한있음
+
+* 디렉토리 만들면, 기본 권한은 755 임
+* 파일 생성하면, 기본 권한은 644 임
+ => 이 기본 권한은 umask 설정값에 따라 결정됨 (022 임)
+
+* 숫자 지정 방식:
+	r	w	x
+	2의 2승 	2의 1승	2의 0승 자리가 됨
+	4	2	1 => 3개의 값을 더하기한 결과로 표현됨
+	소유자 : 6이면 4 + 2 가 되므로 rw- 을 의미함
+		7이면 4+2+1 이므로 rwx 권한이 주어짐
+		4이면 r-- 권한이 주어짐
+		5이면 4+1 이므로 r-x 권한이 됨
+
+	디렉토리 기본 권한은 777임
+	소유자가 7, 그룹이 7, 기타사용자가 7 임
+	rwx	  rwx	    rwx
+	umask 적용시에는 777 - 022 => 755 가 기본권한으로 변경됨
+	user 7, group 5, etc 5 => rwx r-x r-x
+	결과로 director 는 기본 만들면 권한이 : drwxr-xr-x 권한이 부여됨
+
+	파일의 기본 권한은 666임
+	user 6, group 6, etc 6 => 666 - 022 => 644임
+	user 6, group 4, etc 4
+	rw-	r--	r-- => 파일의 권한 표시 : -rw-r--r-- 임 
+
+* 권한 변경은 숫자 방식으로 변경할 수 있고,
+ex> 파일 권한은 644인데, 664로 변경
+# chmod 664 file1.txt
+# ll 
+
+* 권한 변경은 기호(symbolic) 방식으로 변경할 수도 있음
+* 읽기(r : read), 쓰기(w : write), 실행(x : excute)
+* 소유자(u : user), 그룹(g : group), 기타사용자(o : other)
+* 권한 추가 : +, 권한제거 : -
+ex> 소유자에게 x 권한 추가한다면:
+# chmod u+x file1.txt
+ex> 사용자와 그룹에 실행 권한 추가
+# chmod ug+x file1.txt
+ex> 기타사용자에서 읽기 권한 제거
+# chmod o-r file1.txt
+
+* 디렉토리 권한:
+ r : 디렉토리 안 목록 조회 가능 (ls)
+ w : 디렉토리 내에서 파일 생성, 삭제 가능
+ x : 디렉토리에 진입 가능 (cd)
+drwxr-xr-x (기본 권한 755로 지정됨)
+
+ex> 디렉토리에 실행권한을 제거
+# chmod ugo-x dir1
+# cd dir1
+*** ubuntu 에서 root 게정에서는 디렉토리 접근 권한이 없어도 대부분 통과됨
+
+
+
+
+
+
+
+
+
+
+
